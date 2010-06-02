@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/adog.png</file>
+        <file>images/aepoha.png</file>
+        <file>images/Char - Dot.png</file>
+        <file>images/Close.png</file>
+        <file>images/Left.png</file>
+        <file>images/link.png</file>
+        <file>images/new.png</file>
+        <file>images/Photo.png</file>
+        <file>images/cut.png</file>
+        <file>images/epoha.ico</file>
+        <file>images/epoha.png</file>
+        <file>images/Folder.png</file>
+        <file>images/print.png</file>
+        <file>images/reldog.png</file>
+        <file>images/repoha.png</file>
+        <file>images/Right.png</file>
+        <file>images/save.png</file>
+        <file>images/Stats.png</file>
+        <file>images/undo.png</file>
+        <file>images/zoomin.png</file>
+        <file>images/zoomout.png</file>
+		<file>images/Man.png</file>
+		<file>images/Users.png</file>
+    </qresource>
+</RCC>
