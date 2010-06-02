@@ -1,0 +1,8 @@
+  QtProperty *decoratedProperty = decoratedManager->addProperty("Decorated");
+    decoratedManager->setPrefix(decoratedProperty, "speed: ");
+    decoratedManager->setSuffix(decoratedProperty, " km/h");
+    decoratedManager->setValue(decoratedProperty, 123.45);
+    
+    --------------
+    
+    
