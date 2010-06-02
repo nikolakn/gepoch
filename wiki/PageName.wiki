@@ -1,4 +1,4 @@
-= Introduction =
+#summary Introduction
 
 Epoch is designed around the  timescale.  timescale stores dates as Julian days. The Julian date(JD) is the interval of time in days and fractions of a day since January 1, 4713 BC Greenwich noon. 
 
