@@ -34,6 +34,10 @@ NKRelEpoch::NKRelEpoch(NKhron *root,bool relper)
 	name="caption";
 	desc="";
 	posY=100;
+	zoom=0;
+	renderType=0;
+	eventType=0;
+	relLinkDraw=true;
 	apsEpoch=root;
 	textColor.black();
 	lineColor.black();

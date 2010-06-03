@@ -31,6 +31,10 @@ NKApsEvent::NKApsEvent(  )
 	textColor.black();
 	lineColor.black();
 	beckColor.black();
+	zoom=0;
+	renderType=0;
+	eventType=0;
+	relLinkDraw=true;
 	isSelect=false;
 	treeItem=new QTreeWidgetItem(0);
 	treeItem->setText(0,name);
