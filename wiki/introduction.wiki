@@ -10,4 +10,4 @@ There are 6 different objects:
   * absolute person
   * relative person
 
-absolute objects are positioned in relation to the timescale and relative object are positioned in relation to the absolute object. 
+absolute objects are positioned in relation to the timescale and relative object are positioned in relation to the absolute or other relative object. 
