@@ -26,6 +26,10 @@ NKApsPerson::NKApsPerson(  )
 		isSelect=false;
 		name="name";
 		male=true;
+		zoom=0;
+		renderType=0;
+		eventType=0;
+		relLinkDraw=true;
 		treeItem->setText(0,name);
 		treeItem->setTextColor(0,Qt::blue);
 

@@ -29,6 +29,10 @@ NKRelEvent::NKRelEvent(NKhron *root)
 	posY=100;
 	apsEpoch=root;
 	isSelect=false;
+	zoom=0;
+	renderType=0;
+	eventType=0;
+	relLinkDraw=true;
 	treeItem=new QTreeWidgetItem(apsEpoch->getTreeItem());
 	treeItem->setText(0,name);
 	treeItem->setFlags(Qt::ItemIsEnabled);

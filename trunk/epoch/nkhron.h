@@ -40,11 +40,10 @@ protected:
 	QTreeWidgetItem* treetlItem;
 	int index;
 	int pindex;
-private:
 	int zoom;
 	short renderType;
 	short eventType;
-	
+	bool relLinkDraw;
 public:
 	NKhron();
 	
@@ -55,6 +54,46 @@ public:
 	virtual void rebuidTree()=0;
 	//actual start of the epoch in absolute(real) date
 	virtual JD GetApStart()=0;
+    short getEventType() const
+    {
+        return eventType;
+    }
+
+    bool getRelLinkDraw() const
+    {
+        return relLinkDraw;
+    }
+
+    short getRenderType() const
+    {
+        return renderType;
+    }
+
+    void setEventType(short  eventType)
+    {
+        this->eventType = eventType;
+    }
+
+    void setRelLinkDraw(bool relLinkDraw)
+    {
+        this->relLinkDraw = relLinkDraw;
+    }
+
+    void setRenderType(short  renderType)
+    {
+        this->renderType = renderType;
+    }
+
+    QString getDesc() const
+    {
+        return desc;
+    }
+
+    void setDesc(QString desc)
+    {
+        this->desc = desc;
+    }
+
     int getPindex() const
     {
         return pindex;
