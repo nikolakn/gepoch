@@ -110,6 +110,8 @@ private:
     QAction *deleteAction;
 
     NKEpoch Doc;
+
+
 };
 
 #endif
