@@ -308,6 +308,7 @@ void MainWindow::createDockWindows()
     addDockWidget(Qt::LeftDockWidgetArea, dock);
     viewMenu->addAction(dock->toggleViewAction());
     tabifyDockWidget(docktt,dock);
+    connect(decW, SIGNAL(textChanged ()), this, SLOT(decChanged()));
 
     dock = new QDockWidget(tr("Tree"), this);
     Tree = new QTreeWidget(dock);
@@ -454,9 +455,11 @@ void MainWindow::itemClicked(){
     }
     propertyToId.clear();
     idToProperty.clear();
+
     QtVariantProperty *property;
     NKhron *sel=Doc.GetSelHro();
     if(sel){
+    	decW->document()->setPlainText(sel->getDesc());
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
     	if(ep2){
@@ -481,6 +484,9 @@ void MainWindow::itemClicked(){
             addProperty(property, QLatin1String("pen"));
     	}
     }
+    else{
+    	 decW->document()->setPlainText("");
+    }
 }
 void MainWindow::kategorijaChanged(const QString &size){
 	
@@ -495,5 +501,14 @@ void MainWindow::godinaChanged(){
 		update();
 	}
     }
+
+}
+void MainWindow::decChanged(){
+	 NKhron *sel=Doc.GetSelHro();
+
+	 if(sel){
+		 sel->setDesc(decW->document()->toPlainText());
+
+	 }
 
 }
