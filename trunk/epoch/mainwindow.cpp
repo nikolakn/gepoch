@@ -302,8 +302,8 @@ void MainWindow::createDockWindows()
 
     dock = new QDockWidget(tr("description "), this);
 
-    decW = new QTextEdit(dock);
-
+    decW = new QTextBrowser(dock);
+    decW->setOpenExternalLinks(true);
     dock->setWidget(decW);
     addDockWidget(Qt::LeftDockWidgetArea, dock);
     viewMenu->addAction(dock->toggleViewAction());
@@ -464,6 +464,7 @@ void MainWindow::itemClicked(){
     	 decEdit=false;
 
     	decW->setHtml(sel->getDesc());
+
     	decW->setReadOnly(true);
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
