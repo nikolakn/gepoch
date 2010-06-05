@@ -424,6 +424,21 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 				sel->SetStartDate(st.GetJD());
 			}
 	    }
+	    if(id == QLatin1String("EndDate")) {
+	    	NKJD st;
+	    	if(st.ParsDatum(value.toString(),st))
+	    		st.SubDay(sel->GetApStart());
+	    		sel->SetEndDate(st.GetJD());
+	    }
+	    if(id == QLatin1String("EndTime")) {
+	    	NKJD st(sel->GetApStart());
+	        NKJD st1(sel->GetEndDate());
+	        st.AddDay(st1.GetJD());
+			if(st.ParsTime(value.toString(),st)){
+				st.SubDay(sel->GetApStart());
+				sel->SetEndDate(st.GetJD());
+			}
+	    }
 
 	 }
 	 Doc.UpdateTree(Tree,peopleList,timelineList);
@@ -435,7 +450,7 @@ void MainWindow::addProperty(QtVariantProperty *property, const QString &id)
     idToProperty[id] = property;
     QtBrowserItem *item = propertyEditor->addProperty(property);
     if (idToExpanded.contains(id))
-        propertyEditor->setExpanded(item, idToExpanded[id]);
+       propertyEditor->setExpanded(item, idToExpanded[id]);
 }
 void MainWindow::updateExpandState()
 {
@@ -485,8 +500,20 @@ void MainWindow::itemClicked(){
             property->setValue(vv);
             addProperty(property, QLatin1String("StartTime"));
 
+            NKJD st1(sel->GetEndDate());
+            st.AddDay(st1.GetJD());
+            QString vv1=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+            QString dd1=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
+            property = variantManager->addProperty(QVariant::String, tr("End date"));
+            property->setValue(dd1);
+            addProperty(property, QLatin1String("EndDate"));
+            property = variantManager->addProperty(QVariant::String, tr("End time"));
+            property->setValue(vv1);
+            addProperty(property, QLatin1String("EndTime"));
+
             property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
             property->setValue(sel->getLineColor());
+
             addProperty(property, QLatin1String("pen"));
     	}
     }
@@ -523,7 +550,6 @@ void MainWindow::decChanged(){
 
 	 if(sel){
 		 if(!decEdit){
-			 //sel->setDesc(decW->document()->toPlainText());
 			 decW->setReadOnly(true);
 		 }
 		 else{
