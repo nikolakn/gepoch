@@ -54,6 +54,16 @@ public:
 	virtual void rebuidTree()=0;
 	//actual start of the epoch in absolute(real) date
 	virtual JD GetApStart()=0;
+    int getZoom() const
+    {
+        return zoom;
+    }
+
+    void setZoom(int zoom)
+    {
+        this->zoom = zoom;
+    }
+
     short getEventType() const
     {
         return eventType;
