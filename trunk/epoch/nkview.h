@@ -41,11 +41,12 @@ protected:
     void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent (QMouseEvent * event); 
-
+    void mouseDoubleClickEvent ( QMouseEvent * event );
 public:
 signals:
     void statusSig();
     void itemClicked();
+    void itemDoubleClicked();
 private slots:
     void selectFromTree( QTreeWidgetItem  * item, int column );
     void selectFromppTree( QTreeWidgetItem  * item, int column );

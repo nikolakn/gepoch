@@ -29,7 +29,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-
+	decEdit=false;
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setMargin(0);
     skala=new NKSkala();
@@ -348,6 +348,8 @@ void MainWindow::createDockWindows()
     }
     connect(view, SIGNAL(itemClicked()),
              this, SLOT(itemClicked()));
+    connect(view, SIGNAL(itemDoubleClicked()),
+             this, SLOT(itemDoubleClicked()));
     itemClicked();
 }
 
@@ -459,7 +461,10 @@ void MainWindow::itemClicked(){
     QtVariantProperty *property;
     NKhron *sel=Doc.GetSelHro();
     if(sel){
-    	decW->document()->setPlainText(sel->getDesc());
+    	 decEdit=false;
+
+    	decW->setHtml(sel->getDesc());
+    	decW->setReadOnly(true);
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
     	if(ep2){
@@ -488,6 +493,15 @@ void MainWindow::itemClicked(){
     	 decW->document()->setPlainText("");
     }
 }
+void MainWindow::itemDoubleClicked(){
+	decEdit=true;
+	 NKhron *sel=Doc.GetSelHro();
+	    if(sel){
+	    	decW->document()->setPlainText(sel->getDesc());
+	    }
+
+	decW->setReadOnly(false);
+}
 void MainWindow::kategorijaChanged(const QString &size){
 	
 }
@@ -507,8 +521,14 @@ void MainWindow::decChanged(){
 	 NKhron *sel=Doc.GetSelHro();
 
 	 if(sel){
-		 sel->setDesc(decW->document()->toPlainText());
-
+		 if(!decEdit){
+			 //sel->setDesc(decW->document()->toPlainText());
+			 decW->setReadOnly(true);
+		 }
+		 else{
+			 sel->setDesc(decW->document()->toPlainText());
+			 decW->setReadOnly(false);
+		 }
 	 }
 
 }
