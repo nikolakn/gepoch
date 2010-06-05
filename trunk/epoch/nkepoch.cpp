@@ -119,6 +119,11 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 			aph->setIndex(select->getIndex());
 			aph->setLineColor(select->getLineColor());
 			aph->setName(select->getName());
+			aph->setDesc(select->getDesc());
+			aph->setZoom(select->getZoom());
+			aph->setRenderType(select->getRenderType());
+			aph->setEventType(select->getEventType());
+			aph->setRelLinkDraw(select->getRelLinkDraw());
 			aph->setPindex(-1);
 
 			Odvezi();
@@ -148,6 +153,11 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 				aph->setIndex(select->getIndex());
 				aph->setLineColor(select->getLineColor());
 				aph->setName(select->getName());
+				aph->setDesc(select->getDesc());
+				aph->setZoom(select->getZoom());
+				aph->setRenderType(select->getRenderType());
+				aph->setEventType(select->getEventType());
+				aph->setRelLinkDraw(select->getRelLinkDraw());
 				aph->setPindex(-1);
 
 				Odvezi();
@@ -172,6 +182,11 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 				aph->setIndex(select->getIndex());
 				aph->setLineColor(select->getLineColor());
 				aph->setName(select->getName());
+				aph->setDesc(select->getDesc());
+				aph->setZoom(select->getZoom());
+				aph->setRenderType(select->getRenderType());
+				aph->setEventType(select->getEventType());
+				aph->setRelLinkDraw(select->getRelLinkDraw());
 				aph->setPindex(-1);
 
 				Odvezi();
@@ -324,6 +339,11 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 					aph->SetPozY(pre->GetPozY());
 					aph->setLineColor(pre->getLineColor());
 					aph->setName(pre->getName());
+					aph->setDesc(pre->getDesc());
+					aph->setZoom(pre->getZoom());
+					aph->setRenderType(pre->getRenderType());
+					aph->setEventType(pre->getEventType());
+					aph->setRelLinkDraw(pre->getRelLinkDraw());
 					aph->setIndex(pre->getIndex());
 					aph->setPindex(pre->getPindex());
 
@@ -358,6 +378,11 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 						aph->SetPozY(pre->GetPozY());
 						aph->setLineColor(pre->getLineColor());
 						aph->setName(pre->getName());
+						aph->setDesc(pre->getDesc());
+						aph->setZoom(pre->getZoom());
+						aph->setRenderType(pre->getRenderType());
+						aph->setEventType(pre->getEventType());
+						aph->setRelLinkDraw(pre->getRelLinkDraw());
 						aph->setIndex(pre->getIndex());
 						aph->setPindex(pre->getPindex());
 
@@ -388,6 +413,11 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 						aph->SetPozY(pre->GetPozY());
 						aph->setLineColor(pre->getLineColor());
 						aph->setName(pre->getName());
+						aph->setDesc(pre->getDesc());
+						aph->setZoom(pre->getZoom());
+						aph->setRenderType(pre->getRenderType());
+						aph->setEventType(pre->getEventType());
+						aph->setRelLinkDraw(pre->getRelLinkDraw());
 						aph->setIndex(pre->getIndex());
 						aph->setPindex(pre->getPindex());
 						Odvezi();
