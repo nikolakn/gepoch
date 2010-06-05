@@ -430,3 +430,197 @@ void NKView::alink(){
 	    pre=sel;
 	}
 }
+void NKView::mouseDoubleClickEvent ( QMouseEvent * event ){
+	  if (event->button() == Qt::LeftButton) {
+       if(menuAc>0){
+	         if(menuAc==1){
+	         	menuAc=0;
+	         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+	         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+	         	end.SubDay(start.GetJD());
+	         	start.SetTime(12,0,0);
+	         	end.SetTime(12,0,0);
+	         	NKhron *htemp=new NKApsEpoch();
+	         	htemp->SetPozY(event->pos().y()-dy);
+	         	htemp->SetStartDate(start.GetJD());
+	         	htemp->SetEndDate(end.GetJD());
+	         	doc->AddEpohu(htemp);
+	         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+       		update();
+      		}
+      	if(menuAc==2){
+      		///aps event
+      		menuAc=0;
+	         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+	         	NKhron *htemp=new NKApsEvent();
+	         	htemp->SetPozY(event->pos().y()-dy);
+	         	start.SetTime(12,0,0);
+	         	htemp->SetStartDate(start.GetJD());
+	         	htemp->SetEndDate(0);
+	         	doc->AddEpohu(htemp);
+	         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+       		update();
+      	}
+      	if(menuAc==3){
+      		///aps person
+	         	menuAc=0;
+	         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+	         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+	         	end.SubDay(start.GetJD());
+	         	start.SetTime(12,0,0);
+	         	end.SetTime(12,0,0);
+	         	NKhron *htemp=new NKApsPerson();
+	         	htemp->SetPozY(event->pos().y()-dy);
+	         	htemp->SetStartDate(start.GetJD());
+	         	htemp->SetEndDate(end.GetJD());
+	         	doc->AddEpohu(htemp);
+	         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+       		update();
+      	}
+
+      	if(menuAc==4){
+      		///rel epoch
+      		menuAc=0;
+      		NKhron* sel=doc->GetSelHro();
+      		if(sel){
+      		    NKApsPerson* epr = NULL;
+					epr = dynamic_cast<NKApsPerson*> (sel);
+					if(!epr){
+					NKRelPerson* eprr = NULL;
+					eprr = dynamic_cast<NKRelPerson*> (sel);
+					if(!eprr){
+
+	         		NKApsEpoch* ep1 = NULL;
+					ep1 = dynamic_cast<NKApsEpoch*> (sel);
+					if(ep1){
+			         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+			         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+			         	JD aae=sel->GetApStart();
+			         	end.SubDay(start.GetJD());
+			         	start.SubDay(aae);
+			         	start.SetTime(12,0,0);
+			         	end.SetTime(12,0,0);
+			         	NKhron *htemp=new NKRelEpoch(sel);
+			         	htemp->SetPozY(event->pos().y()-dy);
+			         	htemp->SetStartDate(start.GetJD());
+			         	htemp->SetEndDate(end.GetJD());
+			         	doc->AddEpohu(htemp);
+			         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+	         			update();
+      			}
+      			NKRelEpoch* ep2 = NULL;
+					ep2 = dynamic_cast<NKRelEpoch*> (sel);
+					if(ep2){
+			         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+			         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+			         	JD aae=sel->GetApStart();
+			         	end.SubDay(start.GetJD());
+			         	start.SubDay(aae);
+			         	start.SetTime(12,0,0);
+			         	end.SetTime(12,0,0);
+			         	NKhron *htemp=new NKRelEpoch(sel);
+			         	htemp->SetPozY(event->pos().y()-dy);
+			         	htemp->SetStartDate(start.GetJD());
+			         	htemp->SetEndDate(end.GetJD());
+			         	doc->AddEpohu(htemp);
+			         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+	         			update();
+      			}
+     			}}
+      		}
+      	}
+      	//////
+      	if(menuAc==5){
+
+	         	menuAc=0;
+	         		NKhron* sel=doc->GetSelHro();
+	         	if(sel){
+
+		         	NKRelEvent* epr = NULL;
+					epr = dynamic_cast<NKRelEvent*> (sel);
+					if(!epr){
+						NKApsEvent* epr22 = NULL;
+						epr22 = dynamic_cast<NKApsEvent*> (sel);
+						if(!epr22){
+				         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+				         	JD aae=sel->GetApStart();
+				         	start.SubDay(aae);
+				         	start.SetTime(12,0,0);
+
+				        	NKhron *htemp=new NKRelEvent(sel);
+				         	htemp->SetPozY(event->pos().y()-dy);
+				         	htemp->SetStartDate(start.GetJD());
+				         	doc->AddEpohu(htemp);
+				         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+		         			update();
+		        		}
+      		}
+     		}
+      	}
+      	//////
+      	    if(menuAc==6){
+      		///rel epoch
+      		menuAc=0;
+      		NKhron* sel=doc->GetSelHro();
+      		if(sel){
+	         		NKApsEpoch* ep1 = NULL;
+					ep1 = dynamic_cast<NKApsEpoch*> (sel);
+					if(ep1){
+			         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+			         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+			         	JD aae=sel->GetApStart();
+			         	end.SubDay(start.GetJD());
+			         	start.SubDay(aae);
+			         	start.SetTime(12,0,0);
+			         	end.SetTime(12,0,0);
+			         	NKhron *htemp=new NKRelPerson(sel);
+			         	htemp->SetPozY(event->pos().y()-dy);
+			         	htemp->SetStartDate(start.GetJD());
+			         	htemp->SetEndDate(end.GetJD());
+			         	doc->AddEpohu(htemp);
+			         	doc->UpdateTree(mTree,mTreepp,mTreetl);
+	         			update();
+      			}
+      			NKRelEpoch* ep2 = NULL;
+					ep2 = dynamic_cast<NKRelEpoch*> (sel);
+					if(ep2){
+			         	NKJD start=m_skala->DatumZaPolozaj(event->pos().x());
+			         	NKJD end=m_skala->DatumZaPolozaj(event->pos().x()+200);
+			         	JD aae=sel->GetApStart();
+			         	end.SubDay(start.GetJD());
+			         	start.SubDay(aae);
+			         	start.SetTime(12,0,0);
+			         	end.SetTime(12,0,0);
+			         	NKhron *htemp=new NKRelPerson(sel);
+			         	htemp->SetPozY(event->pos().y()-dy);
+			         	htemp->SetStartDate(start.GetJD());
+			         	htemp->SetEndDate(end.GetJD());
+			         	doc->AddEpohu(htemp);
+			        	doc->UpdateTree(mTree,mTreepp,mTreetl);
+	         			update();
+      			}
+      		}
+      	}
+       }
+       else{
+       	doc->ClearSelection();
+       	emit itemClicked();
+       	if(doc->Select(m_skala,event->pos().x(),event->pos().y()-dy)){
+       		if(islink){
+       			islink=false;
+       			doc->Link(pre,mTree,mTreepp,mTreetl);
+       			doc->UpdateTree(mTree,mTreepp,mTreetl);
+       			pre=0;
+       		}
+       		else{
+       		emit itemClicked();
+       		emit itemDoubleClicked();
+       		isMove=true;
+       		isSelect=true;
+       		}
+      	}
+          update();
+       }
+
+   }
+}

@@ -54,6 +54,7 @@ private slots:
     void valueChanged(QtProperty *property, const QVariant &value);
     void decChanged();
     void itemClicked();
+    void itemDoubleClicked();
     void kategorijaChanged(const QString &size);
     void godinaChanged();
 private:
@@ -111,7 +112,7 @@ private:
     QAction *deleteAction;
 
     NKEpoch Doc;
-
+    bool decEdit;
 
 };
 
