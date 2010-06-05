@@ -74,7 +74,7 @@ private:
     QTreeWidget *timelineList;
     QTreeWidget *peopleList;
     QTreeWidget *Tree;
-        
+    QTextEdit *decW;
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *viewMenu;

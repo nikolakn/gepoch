@@ -300,14 +300,24 @@ void MainWindow::createDockWindows()
     viewMenu->addAction(dock->toggleViewAction());
     tabifyDockWidget(docktt,dock);
 
-    dock = new QDockWidget(tr("Tree"), this);
+    dock = new QDockWidget(tr("description "), this);
 
+    decW = new QTextEdit(dock);
+
+    dock->setWidget(decW);
+    addDockWidget(Qt::LeftDockWidgetArea, dock);
+    viewMenu->addAction(dock->toggleViewAction());
+    tabifyDockWidget(docktt,dock);
+
+    dock = new QDockWidget(tr("Tree"), this);
     Tree = new QTreeWidget(dock);
 
     dock->setWidget(Tree);
     addDockWidget(Qt::LeftDockWidgetArea, dock);
     viewMenu->addAction(dock->toggleViewAction());
     tabifyDockWidget(docktt,dock);
+
+
     ///////////////
     view->setTree(Tree,peopleList,timelineList);
     connect(Tree,SIGNAL(itemDoubleClicked( QTreeWidgetItem  *, int)),
