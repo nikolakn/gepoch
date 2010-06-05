@@ -52,6 +52,7 @@ private slots:
     void del();
     void link();
     void valueChanged(QtProperty *property, const QVariant &value);
+    void decChanged();
     void itemClicked();
     void kategorijaChanged(const QString &size);
     void godinaChanged();
