@@ -36,11 +36,12 @@ public:
    NKView(QWidget *parent = 0, NKSkala *skala=0, NKEpoch *document=0,QTreeWidget *Tree=0);
    QString getStatus() {return status;};
    void setTree(QTreeWidget *Tree,QTreeWidget *Treepp,QTreeWidget *Treetl) {mTree=Tree;mTreepp=Treepp;mTreetl=Treetl;};
+   void setKat(short kk) {kateg=kk;};
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent (QMouseEvent * event); 
+    void mouseReleaseEvent (QMouseEvent * event);
     void mouseDoubleClickEvent ( QMouseEvent * event );
 public:
 signals:
@@ -51,15 +52,15 @@ private slots:
     void selectFromTree( QTreeWidgetItem  * item, int column );
     void selectFromppTree( QTreeWidgetItem  * item, int column );
     void selectFromtlTree( QTreeWidgetItem  * item, int column );
- 	void aepoha();   
- 	void adog();
- 	void aPer();
- 	void rPer();
- 	void repoha();
+        void aepoha();
+        void adog();
+        void aPer();
+        void rPer();
+        void repoha();
     void rdog();
 
- 	void adel();
- 	void acut();
+        void adel();
+        void acut();
     void alink();
 private:
     NKSkala *m_skala;
@@ -78,6 +79,7 @@ private:
     NKhron *pre;
     int dy;
     bool pomeri;
+    short kateg;
 };
 
 #endif // NKVIEW_H

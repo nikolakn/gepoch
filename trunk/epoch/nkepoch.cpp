@@ -56,10 +56,13 @@ int NKEpoch::GetBrojEpoha(void){
 	return (vhron.size());
 }
 
-void NKEpoch::Draw(QPainter *painter,NKSkala *skala,int Y)
+void NKEpoch::Draw(QPainter *painter,NKSkala *skala,int Y,short kateg)
 {
 	if(GetBrojEpoha()>0){
 		for(QVector<NKhron*>::const_iterator qq = vhron.begin(); qq != vhron.end(); ++qq){
+
+			if((*qq)->getEventType()==kateg || kateg==0)
+
 			(*qq)->Draw(painter,skala,0,Y);
 		}
 	}

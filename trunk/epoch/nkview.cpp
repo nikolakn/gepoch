@@ -37,7 +37,9 @@ NKView::NKView(QWidget *parent,NKSkala *skala,NKEpoch *document,QTreeWidget *Tre
     pre=0;
     dy=0;
     pomeri=false;
+    kateg=0;
 }
+
 void NKView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -95,7 +97,7 @@ void NKView::paintEvent(QPaintEvent *)
 	if(pomeri){
 		painter.drawLine(clik,clik2);
 	}
-	doc->Draw(&painter,m_skala,dy);
+	doc->Draw(&painter,m_skala,dy,kateg);
  //update statusbar
     NKJD jd1=m_skala->DatumZaPolozaj(m_skala->GetPolozaj());
     status=jd1.getString(jd1);
