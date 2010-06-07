@@ -29,6 +29,20 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+
+	list.append("All");
+	list.append(("War and Conflict"));
+	list.append(("Religion"));
+	list.append(("Science"));
+	list.append(("Society"));
+	list.append(("Technology"));
+	list.append(("National"));
+	list.append(("Historical outlines"));
+	list.append(("Culture"));
+	list.append(("Art"));
+	list.append(("Exploration"));
+	list.append(("Nature"));
+	list.append(("Sports"));
 	decEdit=false;
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setMargin(0);
@@ -256,13 +270,9 @@ void MainWindow::createToolBars()
               this, SLOT(godinaChanged()));
     posToolBar->addWidget(godina);
     kategorija=new QComboBox();
-    kategorija->addItem(tr("all"));
-    kategorija->addItem(tr("people"));
-    kategorija->addItem(tr("war"));
-    kategorija->addItem(tr("art"));
-    kategorija->addItem(tr("technology"));
-    connect(kategorija, SIGNAL(currentIndexChanged(QString)),
-            this, SLOT(kategorijaChanged(QString)));
+    kategorija->addItems(list);
+    connect(kategorija, SIGNAL(currentIndexChanged(const QString)),
+            this, SLOT(kategorijaChanged(const QString)));
     posToolBar->addWidget(kategorija);
 
     addEpochToolBar=addToolBar(tr("Add"));
@@ -410,6 +420,9 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	    if (id == QLatin1String("Name")) {
 	    	sel->setName(value.toString());
 	    }
+	    if (id == QLatin1String("category")) {
+		    	sel->setEventType(value.toString().toInt());
+		    }
 	    if(id == QLatin1String("pen")) {
 	        sel->setLineColor(qVariantValue<QColor>(value));
 	    }
@@ -474,6 +487,8 @@ void MainWindow::itemClicked(){
     idToProperty.clear();
 
     QtVariantProperty *property;
+
+
     NKhron *sel=Doc.GetSelHro();
     if(sel){
     	 decEdit=false;
@@ -484,6 +499,8 @@ void MainWindow::itemClicked(){
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
     	if(ep2){
+
+
             property = variantManager->addProperty(QVariant::String, tr("Name"));
             property->setValue(sel->getName());
             addProperty(property, QLatin1String("Name"));
@@ -511,6 +528,11 @@ void MainWindow::itemClicked(){
             property->setValue(vv1);
             addProperty(property, QLatin1String("EndTime"));
 
+            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("category"));
+            property->setAttribute(QLatin1String("enumNames"),list);
+            property->setValue(sel->getEventType());
+                  addProperty(property, QLatin1String("category"));
+
             property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
             property->setValue(sel->getLineColor());
 
@@ -531,7 +553,9 @@ void MainWindow::itemDoubleClicked(){
 	decW->setReadOnly(false);
 }
 void MainWindow::kategorijaChanged(const QString &size){
-	
+
+	view->setKat(kategorija->findText(size,Qt::MatchExactly));
+	update();
 }
 void MainWindow::godinaChanged(){
 	QString ss=godina->document()->toPlainText();

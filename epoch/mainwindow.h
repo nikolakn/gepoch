@@ -25,11 +25,13 @@
 #include "nkskala.h"
 #include "nkepoch.h"
 #include "nkhron.h"
+#include <QStringList>
 class QtVariantProperty;
 class QtProperty;
 class QtBrowserIndex;
 class QTextEdit;
 class QComboBox;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -89,6 +91,7 @@ private:
     QTextEdit *godina;
     QComboBox *kategorija;
 
+    QStringList list;
     QAction *newEpochAct;
     QAction *saveAct;
     QAction *printAct;
