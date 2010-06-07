@@ -30,19 +30,26 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
 
-	list.append("All");
-	list.append(("War and Conflict"));
-	list.append(("Religion"));
-	list.append(("Science"));
-	list.append(("Society"));
-	list.append(("Technology"));
-	list.append(("National"));
-	list.append(("Historical outlines"));
-	list.append(("Culture"));
-	list.append(("Art"));
-	list.append(("Exploration"));
-	list.append(("Nature"));
-	list.append(("Sports"));
+	list.append(tr("All"));
+	list.append(tr("War and Conflict"));
+	list.append(tr("Religion"));
+	list.append(tr("Science"));
+	list.append(tr("Society"));
+	list.append(tr("Technology"));
+	list.append(tr("National"));
+	list.append(tr("Historical outlines"));
+	list.append(tr("Culture"));
+	list.append(tr("Art"));
+	list.append(tr("Exploration"));
+	list.append(tr("Nature"));
+	list.append(tr("Sports"));
+
+    listRender.append(tr("Basic"));
+    listRender.append(tr("Rect"));
+    listAp.append(tr("Always"));
+    listAp.append(tr("here+"));
+    listAp.append(tr("only here"));
+    listAp.append(tr("here-"));
 	decEdit=false;
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setMargin(0);
@@ -528,10 +535,34 @@ void MainWindow::itemClicked(){
             property->setValue(vv1);
             addProperty(property, QLatin1String("EndTime"));
 
+            double trajanje=(double)(sel->GetEndDate());
+
+            QString strtrajanje=QString("%1").arg(trajanje);
+
+            property = variantManager->addProperty(QVariant::String, tr("Duration in days"));
+            property->setValue(strtrajanje);
+            addProperty(property, QLatin1String("Duration"));
+
+            QString godinama=QString("%1").arg(trajanje/365.0);
+
+            property = variantManager->addProperty(QVariant::String, tr("Duration in years"));
+            property->setValue(godinama);
+            addProperty(property, QLatin1String("DurationYears"));
+
             property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("category"));
             property->setAttribute(QLatin1String("enumNames"),list);
             property->setValue(sel->getEventType());
-                  addProperty(property, QLatin1String("category"));
+            addProperty(property, QLatin1String("category"));
+
+            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Render"));
+		    property->setAttribute(QLatin1String("enumNames"),listRender);
+		    property->setValue(sel->getRenderType());
+		    addProperty(property, QLatin1String("Render"));
+
+            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Visibility"));
+		    property->setAttribute(QLatin1String("enumNames"),listAp);
+		    property->setValue(sel->getZoom());
+		    addProperty(property, QLatin1String("Visibility"));
 
             property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
             property->setValue(sel->getLineColor());
