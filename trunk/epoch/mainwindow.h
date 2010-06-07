@@ -92,6 +92,8 @@ private:
     QComboBox *kategorija;
 
     QStringList list;
+    QStringList listRender;
+    QStringList listAp;
     QAction *newEpochAct;
     QAction *saveAct;
     QAction *printAct;
