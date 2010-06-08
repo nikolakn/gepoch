@@ -56,14 +56,31 @@ int NKEpoch::GetBrojEpoha(void){
 	return (vhron.size());
 }
 
-void NKEpoch::Draw(QPainter *painter,NKSkala *skala,int Y,short kateg)
+void NKEpoch::Draw(QPainter *painter,NKSkala *skala,int Y,short kateg,int zoom)
 {
 	if(GetBrojEpoha()>0){
 		for(QVector<NKhron*>::const_iterator qq = vhron.begin(); qq != vhron.end(); ++qq){
 
-			if((*qq)->getEventType()==kateg || kateg==0)
+			//filtering event type all=0, war, art....
+			if((*qq)->getEventType()==kateg || kateg==0){
+				//show always
+				if((*qq)->getZoom()==0){
+					(*qq)->Draw(painter,skala,0,Y);
+				}
+				//here+
+				if((*qq)->getZoom()==1 && (*qq)->getDozoom()>=zoom){
+					(*qq)->Draw(painter,skala,0,Y);
+				}
+				//here
+				if((*qq)->getZoom()==2 && (*qq)->getDozoom()==zoom){
+					(*qq)->Draw(painter,skala,0,Y);
+				}
+				//here-
+				if((*qq)->getZoom()==3 && (*qq)->getDozoom()<=zoom){
+					(*qq)->Draw(painter,skala,0,Y);
+				}
 
-			(*qq)->Draw(painter,skala,0,Y);
+			}
 		}
 	}
 	

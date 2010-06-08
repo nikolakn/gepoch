@@ -5,4 +5,8 @@
     
     --------------
     
+            QApplication app(argc, argv);
+        splash = new QSplashScreen(QPixmap(".png"));
+        splash->setFont( QFont("Helvetica", 10) );
+        splash->show();
     

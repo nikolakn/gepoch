@@ -37,7 +37,7 @@ public:
 	NKEpoch();
 	bool AddEpohu(NKhron *ep);
 	int GetBrojEpoha(void);
-	void Draw(QPainter *painter,NKSkala *skala,int Y,short kateg);
+	void Draw(QPainter *painter,NKSkala *skala,int Y,short kateg,int zoom);
 	bool Select(NKSkala *skala,int x,int y);
 	void ClearSelection();
 	NKhron* GetSelHro();
