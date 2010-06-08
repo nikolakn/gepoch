@@ -37,6 +37,7 @@ public:
    QString getStatus() {return status;};
    void setTree(QTreeWidget *Tree,QTreeWidget *Treepp,QTreeWidget *Treetl) {mTree=Tree;mTreepp=Treepp;mTreetl=Treetl;};
    void setKat(short kk) {kateg=kk;};
+   int getZoom() {return raz;};
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
@@ -80,6 +81,7 @@ private:
     int dy;
     bool pomeri;
     short kateg;
+    int raz;
 };
 
 #endif // NKVIEW_H
