@@ -424,26 +424,7 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	 NKApsEpoch* ep2 = NULL;
 	 ep2 = dynamic_cast<NKApsEpoch*> (sel);
 	 if(ep2){
-	    if (id == QLatin1String("Name")) {
-	    	sel->setName(value.toString());
-	    }
-	    if (id == QLatin1String("category")) {
-		    	sel->setEventType(value.toString().toInt());
-		    }
-	    if(id == QLatin1String("pen")) {
-	        sel->setLineColor(qVariantValue<QColor>(value));
-	    }
-	    if(id == QLatin1String("StartDate")) {
-	    	NKJD st;
-	    	if(st.ParsDatum(value.toString(),st))
-	    		sel->SetStartDate(st.GetJD());
-	    }
-	    if(id == QLatin1String("StartTime")) {
-	    	NKJD st(sel->GetApStart());
-			if(st.ParsTime(value.toString(),st)){
-				sel->SetStartDate(st.GetJD());
-			}
-	    }
+
 	    if(id == QLatin1String("EndDate")) {
 	    	NKJD st;
 	    	if(st.ParsDatum(value.toString(),st))
@@ -469,15 +450,46 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	    		sel->SetEndDate(value.toString().toDouble()*365);
 	    	}
 	    }
-	    if (id == QLatin1String("Visibility")) {
-		    	sel->setZoom(value.toString().toInt());
-		    	sel->setDozoom(view->getZoom());
-	   }
-	    if (id == QLatin1String("Render")) {
-		    	sel->setRenderType(value.toString().toInt());
-	   }
+
+        NKApsPerson* ap2 = NULL;
+        ap2 = dynamic_cast<NKApsPerson*> (sel);
+ 		if(ap2){
+            if (id == QLatin1String("Male")) {
+          		 ap2->setIsMale(value.toBool());
+          	}
+ 		}
 
 	 }
+	   	//aps event
+
+	 //zajednicko
+	    if(id == QLatin1String("StartDate")) {
+		    	NKJD st;
+		    	if(st.ParsDatum(value.toString(),st))
+		    		sel->SetStartDate(st.GetJD());
+		}
+		if(id == QLatin1String("StartTime")) {
+			NKJD st(sel->GetApStart());
+			if(st.ParsTime(value.toString(),st)){
+				sel->SetStartDate(st.GetJD());
+			}
+		}
+	    if (id == QLatin1String("Name")) {
+	    	sel->setName(value.toString());
+	    }
+	    if (id == QLatin1String("category")) {
+		    	sel->setEventType(value.toString().toInt());
+		    }
+	    if(id == QLatin1String("pen")) {
+	        sel->setLineColor(qVariantValue<QColor>(value));
+	    }
+	    if (id == QLatin1String("Visibility")) {
+			    	sel->setZoom(value.toString().toInt());
+			    	sel->setDozoom(view->getZoom());
+		   }
+		if (id == QLatin1String("Render")) {
+				sel->setRenderType(value.toString().toInt());
+	   }
 	 Doc.UpdateTree(Tree,peopleList,timelineList);
 	 view->update();
 }
@@ -520,27 +532,26 @@ void MainWindow::itemClicked(){
     	decW->setHtml(sel->getDesc());
 
     	decW->setReadOnly(true);
+
+    	//zajednicko
+        property = variantManager->addProperty(QVariant::String, tr("Name"));
+        property->setValue(sel->getName());
+        addProperty(property, QLatin1String("Name"));
+
+        NKJD st(sel->GetApStart());
+		 QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+		 QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
+
+		 property = variantManager->addProperty(QVariant::String, tr("Start date"));
+		 property->setValue(dd);
+		 addProperty(property, QLatin1String("StartDate"));
+		 property = variantManager->addProperty(QVariant::String, tr("Start time"));
+		 property->setValue(vv);
+		 addProperty(property, QLatin1String("StartTime"));
+
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
     	if(ep2){
-
-
-            property = variantManager->addProperty(QVariant::String, tr("Name"));
-            property->setValue(sel->getName());
-            addProperty(property, QLatin1String("Name"));
-
-
-            NKJD st(sel->GetApStart());
-            QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
-            QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
-
-            property = variantManager->addProperty(QVariant::String, tr("Start date"));
-            property->setValue(dd);
-            addProperty(property, QLatin1String("StartDate"));
-            property = variantManager->addProperty(QVariant::String, tr("Start time"));
-            property->setValue(vv);
-            addProperty(property, QLatin1String("StartTime"));
-
             NKJD st1(sel->GetEndDate());
             st.AddDay(st1.GetJD());
             QString vv1=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
@@ -566,26 +577,35 @@ void MainWindow::itemClicked(){
             property->setValue(godinama);
             addProperty(property, QLatin1String("DurationYears"));
 
-            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("category"));
-            property->setAttribute(QLatin1String("enumNames"),list);
-            property->setValue(sel->getEventType());
-            addProperty(property, QLatin1String("category"));
-
-            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Render"));
-		    property->setAttribute(QLatin1String("enumNames"),listRender);
-		    property->setValue(sel->getRenderType());
-		    addProperty(property, QLatin1String("Render"));
-
-            property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Visibility"));
-		    property->setAttribute(QLatin1String("enumNames"),listAp);
-		    property->setValue(sel->getZoom());
-		    addProperty(property, QLatin1String("Visibility"));
-
-            property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
-            property->setValue(sel->getLineColor());
-
-            addProperty(property, QLatin1String("pen"));
+            NKApsPerson* ap2 = NULL;
+            ap2 = dynamic_cast<NKApsPerson*> (sel);
+     		if(ap2){
+                property = variantManager->addProperty(QVariant::Bool, tr("is male"));
+                property->setValue(ap2->getIsMale());
+                addProperty(property, QLatin1String("Male"));
+     		}
     	}
+
+
+        	//zajednicko na kraju
+		    property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("category"));
+			property->setAttribute(QLatin1String("enumNames"),list);
+			property->setValue(sel->getEventType());
+			addProperty(property, QLatin1String("category"));
+
+			property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Render"));
+			property->setAttribute(QLatin1String("enumNames"),listRender);
+			property->setValue(sel->getRenderType());
+			addProperty(property, QLatin1String("Render"));
+
+			property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("Visibility"));
+			property->setAttribute(QLatin1String("enumNames"),listAp);
+			property->setValue(sel->getZoom());
+			addProperty(property, QLatin1String("Visibility"));
+
+			property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
+			property->setValue(sel->getLineColor());
+			addProperty(property, QLatin1String("pen"));
     }
     else{
     	 decW->document()->setPlainText("");
