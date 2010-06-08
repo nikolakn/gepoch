@@ -459,6 +459,23 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 				sel->SetEndDate(st.GetJD());
 			}
 	    }
+	    if(id == QLatin1String("Duration")) {
+	    	if(value.toString().toDouble()>0){
+	    		sel->SetEndDate(value.toString().toDouble());
+	    	}
+	    }
+	    if(id == QLatin1String("DurationYears")) {
+	    	if(value.toString().toDouble()>0){
+	    		sel->SetEndDate(value.toString().toDouble()*365);
+	    	}
+	    }
+	    if (id == QLatin1String("Visibility")) {
+		    	sel->setZoom(value.toString().toInt());
+		    	sel->setDozoom(view->getZoom());
+	   }
+	    if (id == QLatin1String("Render")) {
+		    	sel->setRenderType(value.toString().toInt());
+	   }
 
 	 }
 	 Doc.UpdateTree(Tree,peopleList,timelineList);

@@ -51,7 +51,7 @@ void NKView::paintEvent(QPaintEvent *)
     if(grid){
     NKJD ff;
     double rr3=m_skala->GetRazmera();
-    int raz=1;
+    raz=1;
     if(rr3>=((60*24*365)*0.02)){
              raz=10;
     }

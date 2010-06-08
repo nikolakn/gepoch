@@ -41,6 +41,7 @@ protected:
 	int index;
 	int pindex;
 	int zoom;
+	int dozoom;
 	short renderType;
 	short eventType;
 	bool relLinkDraw;
@@ -54,6 +55,16 @@ public:
 	virtual void rebuidTree()=0;
 	//actual start of the epoch in absolute(real) date
 	virtual JD GetApStart()=0;
+    int getDozoom() const
+    {
+        return dozoom;
+    }
+
+    void setDozoom(int dozoom)
+    {
+        this->dozoom = dozoom;
+    }
+
     int getZoom() const
     {
         return zoom;
