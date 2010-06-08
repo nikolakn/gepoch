@@ -50,8 +50,10 @@ void NKView::paintEvent(QPaintEvent *)
     //grid
     if(grid){
     NKJD ff;
+
     double rr3=m_skala->GetRazmera();
-    raz=1;
+    zoom=rr3;
+    int raz=1;
     if(rr3>=((60*24*365)*0.02)){
              raz=10;
     }
@@ -97,7 +99,7 @@ void NKView::paintEvent(QPaintEvent *)
 	if(pomeri){
 		painter.drawLine(clik,clik2);
 	}
-	doc->Draw(&painter,m_skala,dy,kateg);
+	doc->Draw(&painter,m_skala,dy,kateg,zoom);
  //update statusbar
     NKJD jd1=m_skala->DatumZaPolozaj(m_skala->GetPolozaj());
     status=jd1.getString(jd1);
