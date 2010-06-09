@@ -75,8 +75,10 @@ void NKRelPerson::rebuidTree(){
 	treeItem->setText(0,name);
 	treeItem->setTextColor(0,Qt::blue);
 
-	treeppItem->setText(0,name);
-	treeppItem->setTextColor(0,Qt::blue);
+	if(male)
+			treeppItem->setTextColor(0,Qt::blue);
+		else
+			treeppItem->setTextColor(0,Qt::magenta);
 
 	treetlItem->setText(1,name);
 	treetlItem->setTextColor(1,Qt::blue);
