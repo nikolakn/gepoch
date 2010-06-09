@@ -424,7 +424,17 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	 NKApsEpoch* ep2 = NULL;
 	 ep2 = dynamic_cast<NKApsEpoch*> (sel);
 	 if(ep2){
-
+		    if(id == QLatin1String("StartDate")) {
+			    	NKJD st;
+			    	if(st.ParsDatum(value.toString(),st))
+			    		sel->SetStartDate(st.GetJD());
+			}
+			if(id == QLatin1String("StartTime")) {
+				NKJD st(sel->GetApStart());
+				if(st.ParsTime(value.toString(),st)){
+					sel->SetStartDate(st.GetJD());
+				}
+			}
 	    if(id == QLatin1String("EndDate")) {
 	    	NKJD st;
 	    	if(st.ParsDatum(value.toString(),st))
@@ -441,12 +451,12 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 			}
 	    }
 	    if(id == QLatin1String("Duration")) {
-	    	if(value.toString().toDouble()>0){
+	    	if(value.toString().toDouble()>=0){
 	    		sel->SetEndDate(value.toString().toDouble());
 	    	}
 	    }
 	    if(id == QLatin1String("DurationYears")) {
-	    	if(value.toString().toDouble()>0){
+	    	if(value.toString().toDouble()>=0){
 	    		sel->SetEndDate(value.toString().toDouble()*365);
 	    	}
 	    }
@@ -460,20 +470,53 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
  		}
 
 	 }
-	   	//aps event
+    NKApsEvent* ae2 = NULL;
+	ae2 = dynamic_cast<NKApsEvent*> (sel);
+	if(ae2){
+	    if(id == QLatin1String("StartDate")) {
+			    	NKJD st;
+			    	if(st.ParsDatum(value.toString(),st))
+			    		sel->SetStartDate(st.GetJD());
+			}
+			if(id == QLatin1String("StartTime")) {
+				NKJD st(sel->GetApStart());
+				if(st.ParsTime(value.toString(),st)){
+					sel->SetStartDate(st.GetJD());
+				}
+			}
+	}
+     NKRelEvent* re2 = NULL;
+     re2 = dynamic_cast<NKRelEvent*> (sel);
+		if(re2){
+		    if(id == QLatin1String("StartDate")) {
+		    	NKJD st;
+			    	if(st.ParsDatum(value.toString(),st))
+			    		st.SubDay(sel->GetApsolute()->GetApStart());
+			    		sel->SetStartDate(st.GetJD());
+			}
+			if(id == QLatin1String("StartTime")) {
+			    	NKJD st(sel->GetApsolute()->GetApStart());
+			        NKJD st1(sel->GetStartDate());
+			        st.AddDay(st1.GetJD());
+					if(st.ParsTime(value.toString(),st)){
+						st.SubDay(sel->GetApsolute()->GetApStart());
+						sel->SetStartDate(st.GetJD());
+					}
+			}
+			    if(id == QLatin1String("fromEpochdays")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetStartDate(value.toString().toDouble());
+			    	}
+			    }
+			    if(id == QLatin1String("fromEpochYars")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetStartDate(value.toString().toDouble()*365);
+			    	}
+			    }
+		}
 
 	 //zajednicko
-	    if(id == QLatin1String("StartDate")) {
-		    	NKJD st;
-		    	if(st.ParsDatum(value.toString(),st))
-		    		sel->SetStartDate(st.GetJD());
-		}
-		if(id == QLatin1String("StartTime")) {
-			NKJD st(sel->GetApStart());
-			if(st.ParsTime(value.toString(),st)){
-				sel->SetStartDate(st.GetJD());
-			}
-		}
+
 	    if (id == QLatin1String("Name")) {
 	    	sel->setName(value.toString());
 	    }
@@ -538,20 +581,21 @@ void MainWindow::itemClicked(){
         property->setValue(sel->getName());
         addProperty(property, QLatin1String("Name"));
 
-        NKJD st(sel->GetApStart());
-		 QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
-		 QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
 
-		 property = variantManager->addProperty(QVariant::String, tr("Start date"));
-		 property->setValue(dd);
-		 addProperty(property, QLatin1String("StartDate"));
-		 property = variantManager->addProperty(QVariant::String, tr("Start time"));
-		 property->setValue(vv);
-		 addProperty(property, QLatin1String("StartTime"));
 
     	NKApsEpoch* ep2 = NULL;
     	ep2 = dynamic_cast<NKApsEpoch*> (sel);
     	if(ep2){
+			NKJD st(sel->GetApStart());
+			QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+			QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
+
+			property = variantManager->addProperty(QVariant::String, tr("Start date"));
+			property->setValue(dd);
+			addProperty(property, QLatin1String("StartDate"));
+			property = variantManager->addProperty(QVariant::String, tr("Start time"));
+			property->setValue(vv);
+			addProperty(property, QLatin1String("StartTime"));
             NKJD st1(sel->GetEndDate());
             st.AddDay(st1.GetJD());
             QString vv1=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
@@ -585,8 +629,50 @@ void MainWindow::itemClicked(){
                 addProperty(property, QLatin1String("Male"));
      		}
     	}
+		NKApsEvent* ae2 = NULL;
+		ae2 = dynamic_cast<NKApsEvent*> (sel);
+		if(ae2){
+			    NKJD st(sel->GetApStart());
+				QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+				QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
 
+				property = variantManager->addProperty(QVariant::String, tr("Start date"));
+				property->setValue(dd);
+				addProperty(property, QLatin1String("StartDate"));
+				property = variantManager->addProperty(QVariant::String, tr("Start time"));
+				property->setValue(vv);
+				addProperty(property, QLatin1String("StartTime"));
+		}
+        NKRelEvent* re2 = NULL;
+        re2 = dynamic_cast<NKRelEvent*> (sel);
+ 		if(re2){
 
+				double trajanje=(double)(sel->GetStartDate());
+
+				QString strtrajanje=QString("%1").arg(trajanje);
+
+				property = variantManager->addProperty(QVariant::String, tr("form epoch start(Days)"));
+				property->setValue(strtrajanje);
+				addProperty(property, QLatin1String("fromEpochdays"));
+
+				QString godinama=QString("%1").arg(trajanje/365.0);
+
+				property = variantManager->addProperty(QVariant::String, tr("from epoch start(years)"));
+				property->setValue(godinama);
+				addProperty(property, QLatin1String("fromEpochYars"));
+ 		}
+        NKRelEpoch* reep2 = NULL;
+        reep2 = dynamic_cast<NKRelEpoch*> (sel);
+ 		if(reep2){
+
+            NKRelPerson* rp2 = NULL;
+            rp2 = dynamic_cast<NKRelPerson*> (sel);
+     		if(rp2){
+                property = variantManager->addProperty(QVariant::Bool, tr("is male"));
+                property->setValue(rp2->getIsMale());
+                addProperty(property, QLatin1String("Male"));
+     		}
+ 		}
         	//zajednicko na kraju
 		    property = variantManager->addProperty(QtVariantPropertyManager::enumTypeId(), tr("category"));
 			property->setAttribute(QLatin1String("enumNames"),list);
