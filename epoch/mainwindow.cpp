@@ -513,8 +513,75 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 			    		sel->SetStartDate(value.toString().toDouble()*365);
 			    	}
 			    }
+	            if (id == QLatin1String("Link")) {
+	          		 sel->setRelLinkDraw(value.toBool());
+	          	}
 		}
-
+	 //rel epoch
+		 NKRelEpoch* rep2 = NULL;
+			 rep2 = dynamic_cast<NKRelEpoch*> (sel);
+			 if(rep2){
+				if(id == QLatin1String("StartDate")) {
+							NKJD st;
+								if(st.ParsDatum(value.toString(),st))
+									st.SubDay(sel->GetApsolute()->GetApStart());
+									sel->SetStartDate(st.GetJD());
+				}
+				if(id == QLatin1String("StartTime")) {
+						NKJD st(sel->GetApsolute()->GetApStart());
+						NKJD st1(sel->GetStartDate());
+						st.AddDay(st1.GetJD());
+						if(st.ParsTime(value.toString(),st)){
+							st.SubDay(sel->GetApsolute()->GetApStart());
+							sel->SetStartDate(st.GetJD());
+						}
+				}
+			    if(id == QLatin1String("EndDate")) {
+			    	NKJD st;
+			    	if(st.ParsDatum(value.toString(),st))
+			    		st.SubDay(sel->GetApStart());
+			    		sel->SetEndDate(st.GetJD());
+			    }
+			    if(id == QLatin1String("EndTime")) {
+			    	NKJD st(sel->GetApStart());
+			        NKJD st1(sel->GetEndDate());
+			        st.AddDay(st1.GetJD());
+					if(st.ParsTime(value.toString(),st)){
+						st.SubDay(sel->GetApStart());
+						sel->SetEndDate(st.GetJD());
+					}
+			    }
+			    if(id == QLatin1String("Duration")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetEndDate(value.toString().toDouble());
+			    	}
+			    }
+			    if(id == QLatin1String("DurationYears")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetEndDate(value.toString().toDouble()*365);
+			    	}
+			    }
+			    if(id == QLatin1String("fromEpochdays")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetStartDate(value.toString().toDouble());
+			    	}
+			    }
+			    if(id == QLatin1String("fromEpochYars")) {
+			    	if(value.toString().toDouble()>=0){
+			    		sel->SetStartDate(value.toString().toDouble()*365);
+			    	}
+			    }
+	            if (id == QLatin1String("Link")) {
+	          		 sel->setRelLinkDraw(value.toBool());
+	          	}
+		        NKRelPerson* rap2 = NULL;
+		        rap2 = dynamic_cast<NKRelPerson*> (sel);
+		 		if(rap2){
+		            if (id == QLatin1String("Male")) {
+		          		 rap2->setIsMale(value.toBool());
+		          	}
+		 		}
+			 }
 	 //zajednicko
 
 	    if (id == QLatin1String("Name")) {
@@ -646,7 +713,16 @@ void MainWindow::itemClicked(){
         NKRelEvent* re2 = NULL;
         re2 = dynamic_cast<NKRelEvent*> (sel);
  		if(re2){
+ 			NKJD st(sel->GetApStart());
+				QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+				QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
 
+				property = variantManager->addProperty(QVariant::String, tr("Start date"));
+				property->setValue(dd);
+				addProperty(property, QLatin1String("StartDate"));
+				property = variantManager->addProperty(QVariant::String, tr("Start time"));
+				property->setValue(vv);
+				addProperty(property, QLatin1String("StartTime"));
 				double trajanje=(double)(sel->GetStartDate());
 
 				QString strtrajanje=QString("%1").arg(trajanje);
@@ -660,11 +736,64 @@ void MainWindow::itemClicked(){
 				property = variantManager->addProperty(QVariant::String, tr("from epoch start(years)"));
 				property->setValue(godinama);
 				addProperty(property, QLatin1String("fromEpochYars"));
+
+	            property = variantManager->addProperty(QVariant::Bool, tr("Draw Link"));
+	            property->setValue(sel->getRelLinkDraw());
+	            addProperty(property, QLatin1String("Link"));
  		}
         NKRelEpoch* reep2 = NULL;
         reep2 = dynamic_cast<NKRelEpoch*> (sel);
  		if(reep2){
+ 			NKJD st(sel->GetApStart());
+			QString vv=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+			QString dd=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
 
+			property = variantManager->addProperty(QVariant::String, tr("Start date"));
+			property->setValue(dd);
+			addProperty(property, QLatin1String("StartDate"));
+			property = variantManager->addProperty(QVariant::String, tr("Start time"));
+			property->setValue(vv);
+ 			addProperty(property, QLatin1String("StartTime"));
+ 	        NKJD st1(sel->GetEndDate());
+			st.AddDay(st1.GetJD());
+			QString vv1=QString("%1:%2").arg(abs(st.GetHour())).arg(abs(st.GetMin()));
+			QString dd1=QString("%1.%2.%3").arg(abs(st.GetGregDay())).arg(abs(st.GetGregMonth())).arg(st.GetGregYear());
+			property = variantManager->addProperty(QVariant::String, tr("End date"));
+			property->setValue(dd1);
+
+			addProperty(property, QLatin1String("EndDate"));
+			property = variantManager->addProperty(QVariant::String, tr("End time"));
+			property->setValue(vv1);
+			addProperty(property, QLatin1String("EndTime"));
+
+		    double trajanje=(double)(sel->GetEndDate());
+			QString strtrajanje=QString("%1").arg(trajanje);
+			property = variantManager->addProperty(QVariant::String, tr("Duration in days"));
+			property->setValue(strtrajanje);
+			addProperty(property, QLatin1String("Duration"));
+			QString godinama=QString("%1").arg(trajanje/365.0);
+			property = variantManager->addProperty(QVariant::String, tr("Duration in years"));
+			property->setValue(godinama);
+			addProperty(property, QLatin1String("DurationYears"));
+
+			trajanje=(double)(sel->GetStartDate());
+
+			strtrajanje=QString("%1").arg(trajanje);
+
+			property = variantManager->addProperty(QVariant::String, tr("form epoch start(Days)"));
+			property->setValue(strtrajanje);
+			addProperty(property, QLatin1String("fromEpochdays"));
+
+			godinama=QString("%1").arg(trajanje/365.0);
+
+			property = variantManager->addProperty(QVariant::String, tr("from epoch start(years)"));
+			property->setValue(godinama);
+			addProperty(property, QLatin1String("fromEpochYars"));
+
+		    property = variantManager->addProperty(QVariant::Bool, tr("Draw Link"));
+			property->setValue(sel->getRelLinkDraw());
+			addProperty(property, QLatin1String("Link"));
+			//rel person
             NKRelPerson* rp2 = NULL;
             rp2 = dynamic_cast<NKRelPerson*> (sel);
      		if(rp2){
