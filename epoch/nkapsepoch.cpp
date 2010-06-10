@@ -89,15 +89,27 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 		    int xt=x;
 		    if(x==-1)
 		    	xt=5;
-			painter->drawLine(x,posY+YY,x2,posY+YY);
-			QFont m_Font;
-	   		m_Font=QFont("Times", 10);
-	   		painter->setFont(m_Font);
-			painter->drawText(xt,(posY+YY+10),name);
+		    if(renderType==0){
+				painter->drawLine(x,posY+YY,x2,posY+YY);
+				QFont m_Font;
+				m_Font=QFont("Times", 10);
+				painter->setFont(m_Font);
+				painter->drawText(xt,(posY+YY+10),name);
+		    }
+		    if(renderType==1){
+				//painter->drawLine(x,posY+YY,x2,posY+YY);
+				painter->drawRect(x,posY+YY,x2-x,15);
+				//painter->fillRect(x,posY+YY,x2,15,Qt::white);
+				QFont m_Font;
+				m_Font=QFont("Times", 10);
+				painter->setFont(m_Font);
+				painter->drawText(xt+2,(posY+YY+12),name);
+		    }
 	}
 	}
 };
 bool NKApsEpoch::Select(NKSkala *skala,int x,int y){
+    if(renderType==0){
 		NKJD d1(startDate);
 		int poc=skala->PolozajZaDatum(d1);
 		NKJD d2(endDate);
@@ -106,12 +118,26 @@ bool NKApsEpoch::Select(NKSkala *skala,int x,int y){
 	    if(kraj<-1)
 	    	kraj=kraj*-1;
 		if(x>=poc && x<=kraj){
-			if(y>=(posY-3) && y<=(posY+3)){
+			if(y>=(posY-4) && y<=(posY+4)){
+				isSelect=true;
+				return true;
+			}
+		}
+    }
+    if(renderType==1){
+		NKJD d1(startDate);
+		int poc=skala->PolozajZaDatum(d1);
+		NKJD d2(endDate);
+		d2.AddDay(d1.GetJD());
+		int kraj=skala->PolozajZaDatum(d2);
+	    if(kraj<-1)
+	    	kraj=kraj*-1;
+		if(x>=poc && x<=kraj){
+			if(y>=(posY-4) && y<=(posY+19)){
 				isSelect=true;
 				return true;	
 			}
-							
-			
 		}
+    }
 	return false;
 }

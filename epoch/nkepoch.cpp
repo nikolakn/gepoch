@@ -144,6 +144,7 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 			aph->setRenderType(select->getRenderType());
 			aph->setEventType(select->getEventType());
 			aph->setRelLinkDraw(select->getRelLinkDraw());
+			aph->setIsMale(rp->getIsMale());
 			aph->setPindex(-1);
 
 			Odvezi();
@@ -366,7 +367,7 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 					aph->setRelLinkDraw(pre->getRelLinkDraw());
 					aph->setIndex(pre->getIndex());
 					aph->setPindex(pre->getPindex());
-
+					aph->setIsMale(rp->getIsMale());
 					AddEpohu(aph);
 					for(int i = 0; i < vhron.size(); ++i){
 						if(vhron.at(i)->GetApsolute()==pre){
