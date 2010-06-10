@@ -146,8 +146,8 @@ void MainWindow::save()
 	 out<< (double)(skala->GetPocetak().GetJD());
      out<< (bool)decEdit;
 	 out<< (int)kategorija->currentIndex();
-	 Doc.save(out);
 	 view->save(out);
+	 Doc.save(out);
     statusBar()->showMessage(tr("Saved '%1'").arg(fileName), 2000);
 }
 
@@ -904,5 +904,43 @@ void MainWindow::decChanged(){
 }
 void MainWindow::open()
 {
-
+    QString fileName = QFileDialog::getOpenFileName(this,
+                        tr("Choose a file name"), "",
+                        tr("epo (*.epo)"));
+    if (fileName.isEmpty())
+        return;
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, tr("Dock Widgets"),
+                             tr("Cannot write file %1:\n%2.")
+                             .arg(fileName)
+                             .arg(file.errorString()));
+        return;
+    }
+    //////////
+		    timelineList->clear();
+		    peopleList->clear();
+		    Tree->clear();
+		    decW->clear();
+		    decEdit=false;
+			Doc.ocisti();
+			view->ocisti();
+			godina->document()->setPlainText(tr(""));
+    //////////
+     QDataStream in(&file);
+     qint32 verzija;
+     in >> verzija; //verzija formata
+     double pocetak;
+	 in >> pocetak;
+	 NKJD pp(pocetak);
+	 skala->SetPocetak(pp);
+     in >> decEdit;
+     int ins;
+	 in >> ins;
+	 kategorija->setCurrentIndex(ins);
+	  view->open(in);
+	  Doc.open(in);
+	  Doc.UpdateTree(Tree,peopleList,timelineList);
+	  view->update();
+    statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
 }

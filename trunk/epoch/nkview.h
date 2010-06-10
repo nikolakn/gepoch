@@ -40,6 +40,7 @@ public:
    int getZoom() {return zoom;};
    void ocisti();
    void save(QDataStream &o);
+   void open(QDataStream &o);
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
