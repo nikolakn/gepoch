@@ -472,3 +472,74 @@ void NKEpoch::ocisti(){
 	vhron.clear();
 	vhron.empty();
 }
+void NKEpoch::save(QDataStream &o){
+	if(GetBrojEpoha()>0){
+		o<<(int)GetBrojEpoha();
+		Odvezi();
+		//prodji kroz sve
+		for(int i = 0; i <vhron.size(); ++i){
+			NKhron *tren=vhron.at(i);
+			if(tren){
+			NKApsPerson* ap = NULL;
+			ap = dynamic_cast<NKApsPerson*> (tren);
+			if(ap){
+				//apsolutna osoba
+				o<<(int)1;
+				o<<(bool)ap->getIsMale();
+			}
+			else{
+				NKRelPerson* rp = NULL;
+				rp = dynamic_cast<NKRelPerson*> (tren);
+				if(rp){
+					//relativna osoba
+					o<<(int)2;
+					o<<(bool)rp->getIsMale();
+				}
+				else{
+					//moze osve ostalo
+					NKApsEpoch* ae = NULL;
+					ae = dynamic_cast<NKApsEpoch*> (tren);
+					if(ae){
+						o<<(int)3;
+					}
+					NKRelEpoch* re = NULL;
+					re = dynamic_cast<NKRelEpoch*> (tren);
+					if(re){
+						o<<(int)4;
+					}
+					NKApsEvent* aee = NULL;
+					aee = dynamic_cast<NKApsEvent*> (tren);
+					if(aee){
+						o<<(int)5;
+					}
+					NKRelEvent* ree = NULL;
+					ree = dynamic_cast<NKRelEvent*> (tren);
+					if(ree){
+						o<<(int)6;
+					}
+				}
+			}
+			//zajednicko
+
+			o<<(QString)tren->getName();
+			o<< (double)tren->GetStartDate();
+			o<< (double)tren->GetEndDate();
+			o<<(QString)tren->getName();
+			o<<(QString)tren->getDesc();
+			o<<(int)tren->GetPozY();
+			o<<(QColor)tren->getTextColor();
+			o<<(QColor)tren->getLineColor();
+			o<<(QColor)tren->getBeckColor();
+			o<<(bool)tren->GetIsSel();
+			o<<(int)tren->getIndex();
+			o<<(int)tren->getPindex();
+			o<<(int)tren->getZoom();
+			o<<(int)tren->getDozoom();
+			o<<(short)tren->getRenderType();
+			o<<(short)tren->getEventType();
+			o<<(bool)tren->getRelLinkDraw();
+			}
+		}
+	}
+}
+

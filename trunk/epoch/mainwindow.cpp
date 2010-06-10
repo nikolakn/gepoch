@@ -134,13 +134,20 @@ void MainWindow::save()
     if (fileName.isEmpty())
         return;
     QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+    if (!file.open(QIODevice::WriteOnly)) {
         QMessageBox::warning(this, tr("Dock Widgets"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
         return;
     }
+     QDataStream out(&file);
+     out << (qint32)1; //verzija formata
+	 out<< (double)(skala->GetPocetak().GetJD());
+     out<< (bool)decEdit;
+	 out<< (int)kategorija->currentIndex();
+	 Doc.save(out);
+	 view->save(out);
     statusBar()->showMessage(tr("Saved '%1'").arg(fileName), 2000);
 }
 

@@ -39,6 +39,7 @@ public:
    void setKat(short kk) {kateg=kk;};
    int getZoom() {return zoom;};
    void ocisti();
+   void save(QDataStream &o);
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
@@ -61,9 +62,9 @@ private slots:
 	void repoha();
     void rdog();
 
-        void adel();
-        void acut();
-    void alink();
+	void adel();
+	void acut();
+	void alink();
 private:
     NKSkala *m_skala;
     NKEpoch *doc;
