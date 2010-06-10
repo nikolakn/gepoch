@@ -46,6 +46,7 @@ public:
 	void Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void Del(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
+	void ocisti();
 private:
 	NKhron* Getvhron(int aa) {return(vhron[aa]);};
 	int GetIndex(NKhron* hh);

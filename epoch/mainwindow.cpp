@@ -78,6 +78,35 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::newEpoch()
 {
+	if(Doc.GetBrojEpoha()>0){
+
+		if(QMessageBox::warning(this,tr("Epoch"), tr("Do you want to save document"), tr("Save"),tr("No")))
+		{
+			//nemoj da sacuvas
+			NKJD poc;
+						poc.SetShortDate(1,1,2010);
+						skala->SetPocetak(poc);
+		    timelineList->clear();
+		    peopleList->clear();
+		    Tree->clear();
+		    decW->clear();
+		    decEdit=false;
+			Doc.ocisti();
+			view->ocisti();
+			kategorija->setCurrentIndex(0);
+			godina->document()->setPlainText(tr(""));
+
+		}
+		else{
+			//sacuvaj
+			save();
+		}
+	}
+	else{
+		NKJD poc;
+			poc.SetShortDate(1,1,2010);
+			skala->SetPocetak(poc);
+	}
 
 }
 
