@@ -465,3 +465,10 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 		}
 	}}
 }
+void NKEpoch::ocisti(){
+	m_YY=0;
+	isSelect=false;
+	select=0;
+	vhron.clear();
+	vhron.empty();
+}

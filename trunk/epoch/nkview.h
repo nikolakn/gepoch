@@ -38,6 +38,7 @@ public:
    void setTree(QTreeWidget *Tree,QTreeWidget *Treepp,QTreeWidget *Treetl) {mTree=Tree;mTreepp=Treepp;mTreetl=Treetl;};
    void setKat(short kk) {kateg=kk;};
    int getZoom() {return zoom;};
+   void ocisti();
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
@@ -53,11 +54,11 @@ private slots:
     void selectFromTree( QTreeWidgetItem  * item, int column );
     void selectFromppTree( QTreeWidgetItem  * item, int column );
     void selectFromtlTree( QTreeWidgetItem  * item, int column );
-        void aepoha();
-        void adog();
-        void aPer();
-        void rPer();
-        void repoha();
+	void aepoha();
+	void adog();
+	void aPer();
+	void rPer();
+	void repoha();
     void rdog();
 
         void adel();

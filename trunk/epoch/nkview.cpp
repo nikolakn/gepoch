@@ -39,7 +39,18 @@ NKView::NKView(QWidget *parent,NKSkala *skala,NKEpoch *document,QTreeWidget *Tre
     pomeri=false;
     kateg=0;
 }
-
+void NKView::ocisti(){
+    status="";
+    grid=true;
+    menuAc=0;
+    isSelect=false;
+    isMove=false;
+    islink=false;
+    pre=0;
+    dy=0;
+    pomeri=false;
+    kateg=0;
+}
 void NKView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
