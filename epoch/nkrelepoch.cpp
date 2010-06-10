@@ -43,8 +43,10 @@ NKRelEpoch::NKRelEpoch(NKhron *root,bool relper)
 	lineColor.black();
 	beckColor.black();
 	isSelect=false;
-
+	if(apsEpoch)
 	treeItem=new QTreeWidgetItem(apsEpoch->getTreeItem());
+	else
+	treeItem=new QTreeWidgetItem(0);
 	treeItem->setText(0,name);
 	treeItem->setFlags(Qt::ItemIsEnabled);
 
@@ -64,14 +66,20 @@ NKRelEpoch::NKRelEpoch(NKhron *root,bool relper)
 			treeppItem->setFlags(Qt::ItemIsEnabled);
 		}
 		else{
+			if(apsEpoch)
 			treeppItem=new QTreeWidgetItem(apsEpoch->getTreeppItem());
+			else
+			treeppItem=new QTreeWidgetItem(0);
 			treeppItem->setText(0,name);
 			treeppItem->setFlags(Qt::ItemIsEnabled);
 		}
 
 	}
 	else{
+		if(apsEpoch)
 		treeppItem=new QTreeWidgetItem(apsEpoch->getTreeppItem());
+		else
+		treeppItem=new QTreeWidgetItem(0);
 		treeppItem->setText(0,name);
 		treeppItem->setFlags(Qt::ItemIsEnabled);
 	}

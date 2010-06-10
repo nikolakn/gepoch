@@ -48,6 +48,7 @@ public:
 	void Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void ocisti();
 	void save(QDataStream &o);
+	void open(QDataStream &o);
 private:
 	NKhron* Getvhron(int aa) {return(vhron[aa]);};
 	int GetIndex(NKhron* hh);
