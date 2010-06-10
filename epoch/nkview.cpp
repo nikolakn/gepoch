@@ -51,6 +51,16 @@ void NKView::ocisti(){
     pomeri=false;
     kateg=0;
 }
+void NKView::save(QDataStream &o){
+	o<< (bool)grid;
+	o<< (short)menuAc;
+	o<< (bool)isSelect;
+	o<< (bool)isMove;
+	o<< (bool)islink;
+	o<< (int)dy;
+	o<< (bool)pomeri;
+	o<< (short)kateg;
+}
 void NKView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

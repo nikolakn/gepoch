@@ -55,6 +55,26 @@ public:
 	virtual void rebuidTree()=0;
 	//actual start of the epoch in absolute(real) date
 	virtual JD GetApStart()=0;
+    QColor getBeckColor() const
+    {
+        return beckColor;
+    }
+
+    QColor getTextColor() const
+    {
+        return textColor;
+    }
+
+    void setBeckColor(QColor beckColor)
+    {
+        this->beckColor = beckColor;
+    }
+
+    void setTextColor(QColor textColor)
+    {
+        this->textColor = textColor;
+    }
+
     int getDozoom() const
     {
         return dozoom;
