@@ -43,6 +43,7 @@ private slots:
     void newEpoch();
     void save();
     void print();
+    void open();
     void undo();
     void about();
     void mleft();
@@ -96,7 +97,7 @@ private:
     QStringList listAp;
     QAction *newEpochAct;
     QAction *saveAct;
-    QAction *printAct;
+    QAction *openAct;
     QAction *undoAct;
     QAction *aboutAct;
     QAction *aboutQtAct;

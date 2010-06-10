@@ -134,18 +134,18 @@ void MainWindow::createActions()
 {
     newEpochAct = new QAction(QIcon(":/images/new.png"), tr("&New Letter"),this);
     newEpochAct->setShortcuts(QKeySequence::New);
-    newEpochAct->setStatusTip(tr("Create a new form letter"));
+    newEpochAct->setStatusTip(tr("Create a new document"));
     connect(newEpochAct, SIGNAL(triggered()), this, SLOT(newEpoch()));
 
     saveAct = new QAction(QIcon(":/images/save.png"), tr("&Save..."), this);
     saveAct->setShortcuts(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the current form letter"));
+    saveAct->setStatusTip(tr("Save the current document"));
     connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
 
-    printAct = new QAction(QIcon(":/images/print.png"), tr("&Print..."), this);
-    printAct->setShortcuts(QKeySequence::Print);
-    printAct->setStatusTip(tr("Print the current form letter"));
-    connect(printAct, SIGNAL(triggered()), this, SLOT(print()));
+    openAct = new QAction(QIcon(":/images/Folder.png"), tr("&Open..."), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    openAct->setStatusTip(tr("Open document"));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
 //    undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
 //    undoAct->setShortcuts(QKeySequence::Undo);
@@ -230,7 +230,7 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newEpochAct);
     fileMenu->addAction(saveAct);
-    fileMenu->addAction(printAct);
+    fileMenu->addAction(openAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
 
@@ -254,7 +254,7 @@ void MainWindow::createToolBars()
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(newEpochAct);
     fileToolBar->addAction(saveAct);
-    fileToolBar->addAction(printAct);
+    fileToolBar->addAction(openAct);
     fileToolBar->setMaximumHeight(28);
 
     editToolBar = addToolBar(tr("Edit"));
@@ -864,5 +864,9 @@ void MainWindow::decChanged(){
 			 decW->setReadOnly(false);
 		 }
 	 }
+
+}
+void MainWindow::open()
+{
 
 }
