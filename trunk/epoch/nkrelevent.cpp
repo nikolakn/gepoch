@@ -115,12 +115,14 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 			painter->drawText(x+10,(posY+YY+2),name);
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
+      		if(relLinkDraw){
     		if(posY>=ay){
-    			painter->drawLine(x,posY+YY-5,x,ay+YY);
-   			}
-   			else{
-   				painter->drawLine(x,posY+YY+5,x,ay+YY);
-  			}
+					painter->drawLine(x,posY+YY-5,x,ay+YY);
+				}
+				else{
+					painter->drawLine(x,posY+YY+5,x,ay+YY);
+				}
+      		}
 			
 	}
 }

@@ -148,19 +148,33 @@ void NKRelEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 		    if(x==-1)
 		    	xt=5;
 		    int ay=apsEpoch->GetPozY();
-			painter->drawLine(x,posY+YY,x2,posY+YY);
-			QFont m_Font;
-	   		m_Font=QFont("Times", 10);
-	   		painter->setFont(m_Font);
-			painter->drawText(xt,(posY+YY+10),name);
-		    QPen ol1(ss,1,Qt::DashLine);
-    		painter->setPen(ol1);
+		    if(renderType==0){
+				painter->drawLine(x,posY+YY,x2,posY+YY);
+				QFont m_Font;
+				m_Font=QFont("Times", 10);
+				painter->setFont(m_Font);
+				painter->drawText(xt,(posY+YY+10),name);
+				QPen ol1(ss,1,Qt::DashLine);
+				painter->setPen(ol1);
+		    }
+		    if(renderType==1){
+
+				painter->drawRect(x,posY+YY,x2-x,15);
+				QFont m_Font;
+				m_Font=QFont("Times", 10);
+				painter->setFont(m_Font);
+				painter->drawText(xt+1,(posY+YY+11),name);
+				QPen ol1(ss,1,Qt::DashLine);
+				painter->setPen(ol1);
+		    }
+    		if(relLinkDraw)
 			painter->drawLine(x,posY+YY,x,ay+YY);
 	}
 	}
 };
 bool NKRelEpoch::Select(NKSkala *skala,int x,int y){
-		NKJD d1(GetApStart());
+	if(renderType==0){
+	NKJD d1(GetApStart());
 		int poc=skala->PolozajZaDatum(d1);
 		NKJD d2(endDate);
 		d2.AddDay(d1.GetJD());
@@ -168,12 +182,30 @@ bool NKRelEpoch::Select(NKSkala *skala,int x,int y){
 	    if(kraj<-1)
 	    	kraj=kraj*-1;
 		if(x>=poc && x<=kraj){
-			if(y>=(posY-3) && y<=(posY+3)){
+			if(y>=(posY-4) && y<=(posY+4)){
+				isSelect=true;
+				return true;
+			}
+
+
+		}
+	}
+	if(renderType==1){
+	NKJD d1(GetApStart());
+		int poc=skala->PolozajZaDatum(d1);
+		NKJD d2(endDate);
+		d2.AddDay(d1.GetJD());
+		int kraj=skala->PolozajZaDatum(d2);
+	    if(kraj<-1)
+	    	kraj=kraj*-1;
+		if(x>=poc && x<=kraj){
+			if(y>=(posY-4) && y<=(posY+19)){
 				isSelect=true;
 				return true;	
 			}
 							
 			
 		}
+	}
 	return false;
 }
