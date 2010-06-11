@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QtGui/QMainWindow>
@@ -116,7 +115,6 @@ private:
     QAction *linkAct;
     QAction *delAct;
     QAction *deleteAction;
-
     NKEpoch Doc;
     bool decEdit;
 
