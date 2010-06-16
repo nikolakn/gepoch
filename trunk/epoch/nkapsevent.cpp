@@ -90,7 +90,7 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 			QFont m_Font;
 	   		m_Font=QFont("Times", 10);
 	   		painter->setFont(m_Font);
-			painter->drawText(x+10,(posY+YY+2),name);
+			painter->drawText(x+8,(posY+YY+4),name);
 	}
 }
 bool NKApsEvent::Select(NKSkala *skala,int x,int y){

@@ -94,7 +94,7 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 				QFont m_Font;
 				m_Font=QFont("Times", 10);
 				painter->setFont(m_Font);
-				painter->drawText(xt,(posY+YY+10),name);
+				painter->drawText(xt+2,(posY+YY+12),name);
 		    }
 		    if(renderType==1){
 				//painter->drawLine(x,posY+YY,x2,posY+YY);
