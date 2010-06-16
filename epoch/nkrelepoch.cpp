@@ -161,7 +161,7 @@ void NKRelEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 				QFont m_Font;
 				m_Font=QFont("Times", 10);
 				painter->setFont(m_Font);
-				painter->drawText(xt,(posY+YY+10),name);
+				painter->drawText(xt+2,(posY+YY+10),name);
 				QPen ol1(ss,1,Qt::DashLine);
 				painter->setPen(ol1);
 		    }
@@ -171,7 +171,7 @@ void NKRelEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 				QFont m_Font;
 				m_Font=QFont("Times", 10);
 				painter->setFont(m_Font);
-				painter->drawText(xt+1,(posY+YY+11),name);
+				painter->drawText(xt+2,(posY+YY+11),name);
 				QPen ol1(ss,1,Qt::DashLine);
 				painter->setPen(ol1);
 		    }
