@@ -108,8 +108,6 @@ void NKRelEpoch::rebuidTree(){
 	treetlItem=new QTreeWidgetItem(0);
 	treetlItem->setText(1,name);
 	treetlItem->setFlags(Qt::ItemIsEnabled);
-
-
 }
 JD NKRelEpoch::GetApStart()
 {
