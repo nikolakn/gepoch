@@ -79,13 +79,12 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::newEpoch()
 {
 	if(Doc.GetBrojEpoha()>0){
-
 		if(QMessageBox::warning(this,tr("Epoch"), tr("Do you want to save document"), tr("Save"),tr("No")))
 		{
 			//nemoj da sacuvas
 			NKJD poc;
-						poc.SetShortDate(1,1,2010);
-						skala->SetPocetak(poc);
+			poc.SetShortDate(1,1,2010);
+			skala->SetPocetak(poc);
 		    timelineList->clear();
 		    peopleList->clear();
 		    Tree->clear();
@@ -95,7 +94,6 @@ void MainWindow::newEpoch()
 			view->ocisti();
 			kategorija->setCurrentIndex(0);
 			godina->document()->setPlainText(tr(""));
-
 		}
 		else{
 			//sacuvaj
@@ -144,6 +142,7 @@ void MainWindow::save()
      QDataStream out(&file);
      out << (qint32)1; //verzija formata
 	 out<< (double)(skala->GetPocetak().GetJD());
+	 out<< (double)skala->GetRazmera();
      out<< (bool)decEdit;
 	 out<< (int)kategorija->currentIndex();
 	 view->save(out);
@@ -168,7 +167,7 @@ void MainWindow::about()
 
 void MainWindow::createActions()
 {
-    newEpochAct = new QAction(QIcon(":/images/new.png"), tr("&New Letter"),this);
+    newEpochAct = new QAction(QIcon(":/images/new.png"), tr("&New"),this);
     newEpochAct->setShortcuts(QKeySequence::New);
     newEpochAct->setStatusTip(tr("Create a new document"));
     connect(newEpochAct, SIGNAL(triggered()), this, SLOT(newEpoch()));
@@ -183,6 +182,9 @@ void MainWindow::createActions()
     openAct->setStatusTip(tr("Open document"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
+    importAct = new QAction(QIcon(":/images/Folder.png"), tr("Import..."), this);
+    importAct->setStatusTip(tr("Import document"));
+    connect(importAct, SIGNAL(triggered()), this, SLOT(import()));
 //    undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
 //    undoAct->setShortcuts(QKeySequence::Undo);
 //    undoAct->setStatusTip(tr("Undo the last editing action"));
@@ -267,6 +269,7 @@ void MainWindow::createMenus()
     fileMenu->addAction(newEpochAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(openAct);
+    fileMenu->addAction(importAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
 
@@ -931,9 +934,12 @@ void MainWindow::open()
      qint32 verzija;
      in >> verzija; //verzija formata
      double pocetak;
+     double rezmera;
 	 in >> pocetak;
+	 in >> rezmera;
 	 NKJD pp(pocetak);
 	 skala->SetPocetak(pp);
+	 skala->SetRazmera(rezmera);
      in >> decEdit;
      int ins;
 	 in >> ins;
@@ -943,4 +949,44 @@ void MainWindow::open()
 	  Doc.UpdateTree(Tree,peopleList,timelineList);
 	  view->update();
     statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
+}
+void MainWindow::import()
+{
+	   QString fileName = QFileDialog::getOpenFileName(this,
+	                        tr("Choose a file name"), "",
+	                        tr("epo (*.epo)"));
+	    if (fileName.isEmpty())
+	        return;
+	    QFile file(fileName);
+	    if (!file.open(QIODevice::ReadOnly)) {
+	        QMessageBox::warning(this, tr("Dock Widgets"),
+	                             tr("Cannot write file %1:\n%2.")
+	                             .arg(fileName)
+	                             .arg(file.errorString()));
+	        return;
+	    }
+		timelineList->clear();
+		peopleList->clear();
+		Tree->clear();
+		decW->clear();
+		decEdit=false;
+	     QDataStream in(&file);
+	     qint32 verzija;
+	     in >> verzija; //verzija formata
+	     double pocetak;
+	     double rezmera;
+		 in >> pocetak;
+		 in >> rezmera;
+		 NKJD pp(pocetak);
+		 skala->SetPocetak(pp);
+		 skala->SetRazmera(rezmera);
+	     in >> decEdit;
+	     int ins;
+		 in >> ins;
+		 kategorija->setCurrentIndex(ins);
+		  view->import(in);
+		  Doc.import(in);
+		  Doc.UpdateTree(Tree,peopleList,timelineList);
+		  view->update();
+	    statusBar()->showMessage(tr("import '%1'").arg(fileName), 2000);
 }

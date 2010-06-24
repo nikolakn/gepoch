@@ -71,6 +71,16 @@ void NKView::open(QDataStream &o){
 	o >> pomeri;
 	o >> kateg;
 }
+void NKView::import(QDataStream &o){
+	o >> grid;
+	o >> menuAc;
+	o >> isSelect;
+	o >> isMove;
+	o >> islink;
+	o >> dy;
+	o >> pomeri;
+	o >> kateg;
+}
 void NKView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

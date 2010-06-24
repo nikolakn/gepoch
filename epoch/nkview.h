@@ -41,6 +41,7 @@ public:
    void ocisti();
    void save(QDataStream &o);
    void open(QDataStream &o);
+   void import(QDataStream &o);
 protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
