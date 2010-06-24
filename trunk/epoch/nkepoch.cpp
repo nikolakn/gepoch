@@ -815,3 +815,278 @@ void NKEpoch::open(QDataStream &o) {
 	}
 
 }
+void NKEpoch::import(QDataStream &o) {
+
+	int realo=vhron.size();
+	this->Odvezi();
+	int bepo;
+	QString i1;
+	double i2;
+	double i3;
+	QString i4;
+	QString i5;
+	int i6;
+	QColor i7;
+	QColor i8;
+	QColor i9;
+	bool i10;
+	int i11, i12, i13, i14;
+	short i15, i16;
+	bool i17;
+	bool male;
+	o >> bepo;
+	if (bepo > 0) {
+		int vrsta;
+		for (int i = 0; i < bepo; i++) {
+			o >> vrsta;
+			if (vrsta == 1) {
+				o >> male;
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+				NKhron *htemp = new NKApsPerson();
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+				vhron.push_back(htemp);
+			}
+			if (vrsta == 2) {
+
+				o >> male;
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+				NKhron *htemp = new NKRelPerson(0);
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+				vhron.push_back(htemp);
+			}
+			if (vrsta == 3) {
+
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+				NKhron *htemp = new NKApsEpoch();
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+				vhron.push_back(htemp);
+			}
+			if (vrsta == 4) {
+
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+
+				NKhron *htemp = new NKRelEpoch();
+
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+
+				vhron.push_back(htemp);
+
+			}
+			if (vrsta == 5) {
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+				NKhron *htemp = new NKApsEvent();
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+
+				vhron.push_back(htemp);
+
+			}
+			if (vrsta == 6) {
+				o >> i1;
+				o >> i2;
+				o >> i3;
+				o >> i4;
+				o >> i5;
+				o >> i6;
+				o >> i7;
+				o >> i8;
+				o >> i9;
+				o >> i10;
+				o >> i11;
+				o >> i12;
+				o >> i13;
+				o >> i14;
+				o >> i15;
+				o >> i16;
+				o >> i17;
+				NKhron *htemp = new NKRelEvent(0);
+				htemp->setName(i1);
+				htemp->SetStartDate(i2);
+				htemp->SetEndDate(i3);
+				htemp->setName(i4);
+				htemp->setDesc(i5);
+				htemp->SetPozY(i6);
+				htemp->setTextColor(i7);
+				htemp->setLineColor(i8);
+				htemp->setBeckColor(i9);
+				htemp->SetIsSel(i10);
+				htemp->setIndex(i11+realo);
+				htemp->setPindex(i12+realo);
+				htemp->setZoom(i13);
+				htemp->setDozoom(i14);
+				htemp->setRenderType(i15);
+				htemp->setEventType(i16);
+				htemp->setRelLinkDraw(i17);
+				vhron.push_back(htemp);
+			}
+
+		}
+
+	}
+
+	Zavezi();
+
+	for (int i = 0; i < vhron.size(); ++i) {
+		vhron.at(i)->rebuidTree();
+	}
+
+}

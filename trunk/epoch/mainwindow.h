@@ -43,6 +43,7 @@ private slots:
     void save();
     void print();
     void open();
+    void import();
     void undo();
     void about();
     void mleft();
@@ -97,6 +98,7 @@ private:
     QAction *newEpochAct;
     QAction *saveAct;
     QAction *openAct;
+    QAction *importAct;
     QAction *undoAct;
     QAction *aboutAct;
     QAction *aboutQtAct;

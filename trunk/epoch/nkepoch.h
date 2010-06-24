@@ -49,6 +49,7 @@ public:
 	void ocisti();
 	void save(QDataStream &o);
 	void open(QDataStream &o);
+	void import(QDataStream &o);
 private:
 	NKhron* Getvhron(int aa) {return(vhron[aa]);};
 	int GetIndex(NKhron* hh);
