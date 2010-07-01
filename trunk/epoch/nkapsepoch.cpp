@@ -89,7 +89,7 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 		    int xt=x;
 		    if(x==-1)
 		    	xt=5;
-		    if(renderType==0){
+		    if(renderType==0 || renderType==2 || renderType==3 || renderType==4){
 				painter->drawLine(x,posY+YY,x2,posY+YY);
 				QFont m_Font;
 				m_Font=QFont("Times", 10);
@@ -109,7 +109,7 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	}
 };
 bool NKApsEpoch::Select(NKSkala *skala,int x,int y){
-    if(renderType==0){
+    if(renderType==0  || renderType==2 || renderType==3 || renderType==4){
 		NKJD d1(startDate);
 		int poc=skala->PolozajZaDatum(d1);
 		NKJD d2(endDate);
