@@ -100,6 +100,35 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	NKJD d1(GetApStart());
 	int x=skala->PolozajZaDatum(d1);
 	if(x>=(0)){
+		if(renderType==0){
+			QColor ss=lineColor;
+			if(isSelect){
+
+					ss.setBlue(255);
+					painter->setPen(ss);
+			}
+			else{
+					painter->setPen(lineColor);
+			}
+
+			int ay=apsEpoch->GetPozY();
+			painter->drawRect(x-5,(posY+YY)-5,10,10);
+			QFont m_Font;
+	   		m_Font=QFont("Times", 10);
+	   		painter->setFont(m_Font);
+			painter->drawText(x+10,(posY+YY+2),name);
+		    QPen ol1(ss,1,Qt::DashLine);
+    		painter->setPen(ol1);
+      		if(relLinkDraw){
+    		if(posY>=ay){
+					painter->drawLine(x,posY+YY-5,x,ay+YY);
+				}
+				else{
+					painter->drawLine(x,posY+YY+5,x,ay+YY);
+				}
+      		}
+		}
+		if(renderType==1){
 			QColor ss=lineColor;	
 			if(isSelect){
 					
@@ -126,20 +155,138 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 					painter->drawLine(x,posY+YY+5,x,ay+YY);
 				}
       		}
-			
+		}
+		if(renderType==2){
+			QColor ss=lineColor;
+			if(isSelect){
+
+					ss.setBlue(255);
+					painter->setPen(ss);
+			}
+			else{
+					painter->setPen(lineColor);
+			}
+
+			int ay=apsEpoch->GetPozY();
+			painter->drawRect(x-6,(posY+YY)-6,12,12);
+			QFont m_Font;
+	   		m_Font=QFont("Times", 11);
+	   		painter->setFont(m_Font);
+			painter->drawText(x+8,(posY+YY+2),name);
+		    QPen ol1(ss,1,Qt::DashLine);
+    		painter->setPen(ol1);
+      		if(relLinkDraw){
+    		if(posY>=ay){
+					painter->drawLine(x,posY+YY-6,x,ay+YY);
+				}
+				else{
+					painter->drawLine(x,posY+YY+6,x,ay+YY);
+				}
+      		}
+		}
+		if(renderType==3){
+			QColor ss=lineColor;
+			if(isSelect){
+
+					ss.setBlue(255);
+					painter->setPen(ss);
+			}
+			else{
+					painter->setPen(lineColor);
+			}
+
+			int ay=apsEpoch->GetPozY();
+			painter->drawRect(x-8,(posY+YY)-8,16,16);
+			QFont m_Font;
+	   		m_Font=QFont("Times", 12);
+	   		painter->setFont(m_Font);
+			painter->drawText(x+12,(posY+YY+2),name);
+		    QPen ol1(ss,1,Qt::DashLine);
+    		painter->setPen(ol1);
+      		if(relLinkDraw){
+    		if(posY>=ay){
+					painter->drawLine(x,posY+YY-8,x,ay+YY);
+				}
+				else{
+					painter->drawLine(x,posY+YY+8,x,ay+YY);
+				}
+      		}
+		}
+		if(renderType==4){
+			QColor ss=lineColor;
+			if(isSelect){
+
+					ss.setBlue(255);
+					painter->setPen(ss);
+			}
+			else{
+					painter->setPen(lineColor);
+			}
+
+			int ay=apsEpoch->GetPozY();
+			painter->drawRect(x-9,(posY+YY)-9,18,18);
+			QFont m_Font;
+	   		m_Font=QFont("Times", 13);
+	   		painter->setFont(m_Font);
+			painter->drawText(x+14,(posY+YY+2),name);
+		    QPen ol1(ss,1,Qt::DashLine);
+    		painter->setPen(ol1);
+      		if(relLinkDraw){
+    		if(posY>=ay){
+					painter->drawLine(x,posY+YY-9,x,ay+YY);
+				}
+				else{
+					painter->drawLine(x,posY+YY+9,x,ay+YY);
+				}
+      		}
+		}
 	}
 }
 bool NKRelEvent::Select(NKSkala *skala,int x,int y){
 		NKJD d1(GetApStart());
 			int poc=skala->PolozajZaDatum(d1);
 		if(poc>=0){
+			if(renderType==0){
 			if((x>=(poc-5)) && (x<=poc+5)){
 	 			if(y>=(posY-5) && y<=(posY+5)){
 					isSelect=true;
-					return true;	
-				}					
+					return true;
+				}
 			}
-			
+			}
+			if(renderType==1){
+			if((x>=(poc-5)) && (x<=poc+5)){
+	 			if(y>=(posY-5) && y<=(posY+5)){
+					isSelect=true;
+					return true;
+				}
+			}
+			}
+			if(renderType==2){
+			if((x>=(poc-6)) && (x<=poc+6)){
+	 			if(y>=(posY-6) && y<=(posY+6)){
+					isSelect=true;
+					return true;
+				}
+			}
+			}
+			if(renderType==3){
+			if((x>=(poc-8)) && (x<=poc+8)){
+	 			if(y>=(posY-8) && y<=(posY+8)){
+					isSelect=true;
+					return true;
+				}
+			}
+			}
+			if(renderType==4){
+			if((x>=(poc-9)) && (x<=poc+9)){
+	 			if(y>=(posY-9) && y<=(posY+9)){
+					isSelect=true;
+					return true;
+				}
+			}
+			}
+
 		}
 	return false;
 }

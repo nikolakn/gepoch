@@ -43,9 +43,11 @@ MainWindow::MainWindow(QWidget *parent)
 	list.append(tr("Exploration"));
 	list.append(tr("Nature"));
 	list.append(tr("Sports"));
-
     listRender.append(tr("Basic"));
     listRender.append(tr("Rect"));
+    listRender.append(tr("Size1"));
+    listRender.append(tr("Size2"));
+    listRender.append(tr("Size3"));
     listAp.append(tr("Always"));
     listAp.append(tr("here+"));
     listAp.append(tr("only here"));
