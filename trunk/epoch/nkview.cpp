@@ -21,6 +21,7 @@
 #include "nkview.h"
 #include "nkjd.h"
 #include <QMessageBox>
+#include <QImage>
 NKView::NKView(QWidget *parent,NKSkala *skala,NKEpoch *document,QTreeWidget *Tree)
     : QWidget(parent)
 {
@@ -668,4 +669,21 @@ void NKView::mouseDoubleClickEvent ( QMouseEvent * event ){
        }
 
    }
+}
+void NKView::aImage(){
+	NKhron* sel=doc->GetSelHro();
+	if(sel){
+
+		QString fileName = QFileDialog::getOpenFileName(this,
+							tr("Choose a file name"), "",
+							tr("image (*.jpg | *.bmp | *.png | *.gif)"));
+		if (fileName.isEmpty())
+			return;
+		QImage slika(fileName);
+
+
+		sel->setImage(slika.scaled(64,64));
+		update();
+	}
+
 }

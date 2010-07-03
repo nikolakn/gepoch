@@ -187,10 +187,6 @@ void MainWindow::createActions()
     importAct = new QAction(QIcon(":/images/Folder.png"), tr("Import..."), this);
     importAct->setStatusTip(tr("Import document"));
     connect(importAct, SIGNAL(triggered()), this, SLOT(import()));
-//    undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
-//    undoAct->setShortcuts(QKeySequence::Undo);
-//    undoAct->setStatusTip(tr("Undo the last editing action"));
-//    connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
 
     moveLeft = new QAction(QIcon(":/images/Left.png"), tr("&Left"), this);
     moveLeft->setShortcuts(QKeySequence::MoveToNextChar);
@@ -236,7 +232,9 @@ void MainWindow::createActions()
     rPer->setStatusTip(tr("Add rel person"));
     connect(rPer, SIGNAL(triggered()), view, SLOT(rPer()));
     
-
+    imageAction = new QAction(QIcon(":/images/Photo.png"), tr("&add image"), this);
+    imageAction->setStatusTip(tr("Add Image"));
+    connect(imageAction, SIGNAL(triggered()), view, SLOT(aImage()));
 
     cutAct = new QAction(QIcon(":/images/cut.png"), tr("&cut  relative link"), this);
     cutAct->setStatusTip(tr("cut relative link"));
@@ -331,6 +329,7 @@ void MainWindow::createToolBars()
     addEpochToolBar->addAction(rDog);
     addEpochToolBar->addAction(aPer);
     addEpochToolBar->addAction(rPer);
+    addEpochToolBar->addAction(imageAction);
 
 }
 
@@ -862,6 +861,7 @@ void MainWindow::itemClicked(){
 			property = variantManager->addProperty(QVariant::Color, tr("Pen Color"));
 			property->setValue(sel->getLineColor());
 			addProperty(property, QLatin1String("pen"));
+
     }
     else{
     	 decW->document()->setPlainText("");

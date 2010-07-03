@@ -22,6 +22,7 @@
 
 #include "nkskala.h"
 #include <QTreeWidgetItem>
+#include <QImage>
 class NKhron
 {
 protected:
@@ -45,6 +46,7 @@ protected:
 	short renderType;
 	short eventType;
 	bool relLinkDraw;
+	QImage image;
 public:
 	NKhron();
 	
@@ -55,6 +57,16 @@ public:
 	virtual void rebuidTree()=0;
 	//actual start of the epoch in absolute(real) date
 	virtual JD GetApStart()=0;
+    QImage getImage() const
+    {
+        return image;
+    }
+
+    void setImage(QImage image)
+    {
+        this->image = image;
+    }
+
     QColor getBeckColor() const
     {
         return beckColor;

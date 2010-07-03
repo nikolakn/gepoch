@@ -63,7 +63,7 @@ private slots:
 	void rPer();
 	void repoha();
     void rdog();
-
+    void aImage();
 	void adel();
 	void acut();
 	void alink();
