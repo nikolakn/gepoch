@@ -117,6 +117,7 @@ private:
     QAction *linkAct;
     QAction *delAct;
     QAction *deleteAction;
+    QAction *imageAction;
     NKEpoch Doc;
     bool decEdit;
 

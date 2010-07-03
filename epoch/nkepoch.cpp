@@ -537,6 +537,7 @@ void NKEpoch::save(QDataStream &o){
 			o<<(short)tren->getRenderType();
 			o<<(short)tren->getEventType();
 			o<<(bool)tren->getRelLinkDraw();
+			o<<(QImage)tren->getImage();
 			}
 		}
 	}
@@ -557,6 +558,7 @@ void NKEpoch::open(QDataStream &o) {
 	short i15, i16;
 	bool i17;
 	bool male;
+	QImage image;
 	o >> bepo;
 	if (bepo > 0) {
 		vhron.empty();
@@ -583,6 +585,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsPerson();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -601,6 +604,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 2) {
@@ -623,6 +627,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKRelPerson(0);
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -641,6 +646,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 3) {
@@ -662,6 +668,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsEpoch();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -680,6 +687,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 4) {
@@ -701,7 +709,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
-
+				o >> image;
 				NKhron *htemp = new NKRelEpoch();
 
 				htemp->setName(i1);
@@ -721,7 +729,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
-
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 
 			}
@@ -743,6 +751,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsEvent();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -761,7 +770,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
-
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 
 			}
@@ -783,6 +792,7 @@ void NKEpoch::open(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKRelEvent(0);
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -801,6 +811,7 @@ void NKEpoch::open(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 
@@ -833,6 +844,7 @@ void NKEpoch::import(QDataStream &o) {
 	int i11, i12, i13, i14;
 	short i15, i16;
 	bool i17;
+	QImage image;
 	bool male;
 	o >> bepo;
 	if (bepo > 0) {
@@ -858,6 +870,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsPerson();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -876,6 +889,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 2) {
@@ -898,6 +912,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKRelPerson(0);
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -916,6 +931,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 3) {
@@ -937,6 +953,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsEpoch();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -955,6 +972,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 			if (vrsta == 4) {
@@ -976,7 +994,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
-
+				o >> image;
 				NKhron *htemp = new NKRelEpoch();
 
 				htemp->setName(i1);
@@ -996,7 +1014,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
-
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 
 			}
@@ -1018,6 +1036,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKApsEvent();
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -1036,7 +1055,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
-
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 
 			}
@@ -1058,6 +1077,7 @@ void NKEpoch::import(QDataStream &o) {
 				o >> i15;
 				o >> i16;
 				o >> i17;
+				o >> image;
 				NKhron *htemp = new NKRelEvent(0);
 				htemp->setName(i1);
 				htemp->SetStartDate(i2);
@@ -1076,6 +1096,7 @@ void NKEpoch::import(QDataStream &o) {
 				htemp->setRenderType(i15);
 				htemp->setEventType(i16);
 				htemp->setRelLinkDraw(i17);
+				htemp->setImage(image);
 				vhron.push_back(htemp);
 			}
 

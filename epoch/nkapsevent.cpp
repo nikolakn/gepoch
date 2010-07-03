@@ -92,6 +92,9 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 10);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+8,(posY+YY+4),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		}
 		if(renderType==1){
 			if(isSelect){
@@ -108,6 +111,8 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 10);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+8,(posY+YY+4),name);
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		}
 		if(renderType==2){
 			if(isSelect){
@@ -124,6 +129,9 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 11);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+8,(posY+YY+4),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		}
 		if(renderType==3){
 			if(isSelect){
@@ -140,6 +148,8 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 12);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+12,(posY+YY+4),name);
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		}
 		if(renderType==4){
 			if(isSelect){
@@ -156,6 +166,8 @@ void NKApsEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 13);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+14,(posY+YY+4),name);
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		}
 	}
 }

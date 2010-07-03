@@ -117,6 +117,9 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 10);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+10,(posY+YY+2),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
       		if(relLinkDraw){
@@ -145,6 +148,9 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 10);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+10,(posY+YY+2),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
       		if(relLinkDraw){
@@ -173,6 +179,9 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 11);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+8,(posY+YY+2),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
       		if(relLinkDraw){
@@ -201,6 +210,9 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 12);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+12,(posY+YY+2),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
       		if(relLinkDraw){
@@ -229,6 +241,9 @@ void NKRelEvent::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 	   		m_Font=QFont("Times", 13);
 	   		painter->setFont(m_Font);
 			painter->drawText(x+14,(posY+YY+2),name);
+
+			QPoint pq(x,posY+YY+14);
+			painter->drawImage(pq,getImage());
 		    QPen ol1(ss,1,Qt::DashLine);
     		painter->setPen(ol1);
       		if(relLinkDraw){
