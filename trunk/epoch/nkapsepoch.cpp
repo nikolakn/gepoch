@@ -75,6 +75,7 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 		NKJD d2(endDate);
 		d2.AddDay(d1.GetJD());
 		int x2=skala->PolozajZaDatum(d2);
+		int x3=x;
 		if(x2!=-1) {
 			if(x2<-1)
 				x2=x2*-1;
@@ -95,8 +96,10 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 				m_Font=QFont("Times", 10);
 				painter->setFont(m_Font);
 				painter->drawText(xt+2,(posY+YY+12),name);
+				if(x3>=0){
 				QPoint pq(x,posY+YY-65);
 				painter->drawImage(pq,getImage());
+				}
 		    }
 		    if(renderType==1){
 				//painter->drawLine(x,posY+YY,x2,posY+YY);
@@ -106,9 +109,10 @@ void NKApsEpoch::Draw(QPainter* painter,NKSkala* skala,int ,int YY)
 				m_Font=QFont("Times", 10);
 				painter->setFont(m_Font);
 				painter->drawText(xt+2,(posY+YY+12),name);
-
+				if(x3>=0){
 				QPoint pq(x,posY+YY-65);
 				painter->drawImage(pq,getImage());
+				}
 		    }
 	}
 	}
