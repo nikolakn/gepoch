@@ -144,7 +144,8 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 			aph->setRelLinkDraw(select->getRelLinkDraw());
 			aph->setIsMale(rp->getIsMale());
 			aph->setPindex(-1);
-
+			aph->setDozoom(rp->getDozoom());
+			aph->setImage(rp->getImage());
 			Odvezi();
 			vhron.replace(GetIndex(select),aph);
 			Zavezi();
@@ -178,7 +179,8 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 				aph->setEventType(select->getEventType());
 				aph->setRelLinkDraw(select->getRelLinkDraw());
 				aph->setPindex(-1);
-
+				aph->setDozoom(select->getDozoom());
+				aph->setImage(select->getImage());
 				Odvezi();
 				vhron.replace(GetIndex(select),aph);
 				Zavezi();
@@ -207,7 +209,8 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 				aph->setEventType(select->getEventType());
 				aph->setRelLinkDraw(select->getRelLinkDraw());
 				aph->setPindex(-1);
-
+				aph->setDozoom(select->getDozoom());
+				aph->setImage(select->getImage());
 				Odvezi();
 				vhron.replace(GetIndex(select),aph);
 				Zavezi();
@@ -366,6 +369,8 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 					aph->setIndex(pre->getIndex());
 					aph->setPindex(pre->getPindex());
 					aph->setIsMale(rp->getIsMale());
+					aph->setDozoom(pre->getDozoom());
+					aph->setImage(pre->getImage());
 					AddEpohu(aph);
 					for(int i = 0; i < vhron.size(); ++i){
 						if(vhron.at(i)->GetApsolute()==pre){
@@ -404,7 +409,8 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 						aph->setRelLinkDraw(pre->getRelLinkDraw());
 						aph->setIndex(pre->getIndex());
 						aph->setPindex(pre->getPindex());
-
+						aph->setDozoom(pre->getDozoom());
+						aph->setImage(pre->getImage());
 						AddEpohu(aph);
 						for(int i = 0; i < vhron.size(); ++i){
 							if(vhron.at(i)->GetApsolute()==pre){
@@ -439,6 +445,8 @@ void NKEpoch::Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl
 						aph->setRelLinkDraw(pre->getRelLinkDraw());
 						aph->setIndex(pre->getIndex());
 						aph->setPindex(pre->getPindex());
+						aph->setDozoom(pre->getDozoom());
+						aph->setImage(pre->getImage());
 						Odvezi();
 
 						AddEpohu(aph);
