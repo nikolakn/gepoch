@@ -229,6 +229,8 @@ void  NKEpoch::Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 		}
 	}
 }
+//pravi timeline, people i tree stabla za sta je preduslov da hronologije
+//budu sortirane po darumu
 void NKEpoch::UpdateTree(QTreeWidget* tree,QTreeWidget *pp,QTreeWidget *tl)
 {
 	tree->setColumnCount(2);
@@ -290,6 +292,8 @@ int  NKEpoch::GetIndex(NKhron* hh){
 	}
 	return -1;
 }
+//cuva indexe hronologija koje zauzimaju u vhron i indexe apsolutnih hron
+//kako bi se one mogle sacuvati u fajlu ili u slucaju editovalja ponovo povezati
 void NKEpoch::Odvezi(){
 	for(int i = 0; i <vhron.size(); ++i){
 		vhron.at(i)->setIndex(i);
@@ -304,6 +308,8 @@ void NKEpoch::Odvezi(){
 		}
 	}
 }
+//suprotno od odvezivanja Zavezi koristi indexe da bi postavio pokazivace
+//na apsolutne hronologije
 void NKEpoch::Zavezi(){
 	for(int i = 0; i <vhron.size(); ++i){
 		int ap=vhron.at(i)->getPindex();
@@ -1124,13 +1130,17 @@ void NKEpoch::import(QDataStream &o) {
 	}
 
 }
+//sortira hronologije po datumu tako sto ih premesti u privremeni vektor
+//zatim ih po redu vraca u vhron i ponovo uspostavlja  veze
 void NKEpoch::Realocate(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
+
 	if(select){
 		select->SetIsSel(false);
 	}
 	this->select=0;
 	this->isSelect=false;
 	this->Odvezi();
+
 	QVector<NKhron*> temp;
 	for (int i = 0; i < vhron.size(); ++i) {
 		temp.push_back(vhron.at(i));
@@ -1142,23 +1152,20 @@ void NKEpoch::Realocate(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 	for (int i = 0; i < temp.size(); ++i) {
 		this->AddEpohu(temp.at(i));
 	}
+	temp.clear();
+	temp.empty();
 	for (int i = 0; i < vhron.size(); ++i) {
 		int index=vhron.at(i)->getPindex();
+		if(index!=-1){
 		for (int jj = 0; jj < vhron.size(); ++jj) {
 			if(vhron.at(jj)->getIndex()==index){
 				vhron.at(i)->setPindex(jj);
 				break;
 			}
 		}
-
+		}
 	}
+
 	this->Zavezi();
-	Del(tree,pp,tl);
-	tree->clear();
-	pp->clear();
-	tl->clear();
-	for (int i = 0; i < vhron.size(); ++i) {
-			vhron.at(i)->rebuidTree();
-    }
 	UpdateTree(tree,pp,tl);
 }
