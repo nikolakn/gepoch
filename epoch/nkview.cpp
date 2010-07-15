@@ -344,8 +344,10 @@ void NKView::mousePressEvent(QMouseEvent *event){
 
          	doc->ClearSelection(mTree,mTreepp,mTreetl);
          	doc->Realocate(mTree,mTreepp,mTreetl);
+
          	emit itemClicked();
          	if(doc->Select(m_skala,event->pos().x(),event->pos().y()-dy)){
+
          		if(islink){
          			islink=false;
          			doc->Link(pre,mTree,mTreepp,mTreetl);
