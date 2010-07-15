@@ -39,13 +39,14 @@ public:
 	int GetBrojEpoha(void);
 	void Draw(QPainter *painter,NKSkala *skala,int Y,short kateg,int zoom);
 	bool Select(NKSkala *skala,int x,int y);
-	void ClearSelection();
+	void ClearSelection(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	NKhron* GetSelHro();
 	void UpdateTree(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	bool SelectID(int id);
 	void Cut(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void Del(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void Link(NKhron* pre,QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
+	void Realocate(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	void ocisti();
 	void save(QDataStream &o);
 	void open(QDataStream &o);

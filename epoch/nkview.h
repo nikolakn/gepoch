@@ -39,6 +39,7 @@ public:
    void setKat(short kk) {kateg=kk;};
    int getZoom() {return zoom;};
    void ocisti();
+   void ocistisel();
    void save(QDataStream &o);
    void open(QDataStream &o);
    void import(QDataStream &o);
