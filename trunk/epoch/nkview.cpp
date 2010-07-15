@@ -52,6 +52,9 @@ void NKView::ocisti(){
     pomeri=false;
     kateg=0;
 }
+void NKView::ocistisel(){
+
+}
 void NKView::save(QDataStream &o){
 	o<< (bool)grid;
 	o<< (short)menuAc;
@@ -338,7 +341,9 @@ void NKView::mousePressEvent(QMouseEvent *event){
         	}     	
          }
          else{
-         	doc->ClearSelection();
+
+         	doc->ClearSelection(mTree,mTreepp,mTreetl);
+         	doc->Realocate(mTree,mTreepp,mTreetl);
          	emit itemClicked();
          	if(doc->Select(m_skala,event->pos().x(),event->pos().y()-dy)){
          		if(islink){
@@ -346,6 +351,7 @@ void NKView::mousePressEvent(QMouseEvent *event){
          			doc->Link(pre,mTree,mTreepp,mTreetl);
          			doc->UpdateTree(mTree,mTreepp,mTreetl);
          			pre=0;
+
          		}
          		else{
          		emit itemClicked();
@@ -353,7 +359,9 @@ void NKView::mousePressEvent(QMouseEvent *event){
          		isSelect=true;
          		}
         	}
-            update();		
+
+            update();
+
          }
          
      } 
@@ -407,7 +415,7 @@ void NKView::mouseReleaseEvent (QMouseEvent * event)
 void NKView::selectFromTree( QTreeWidgetItem  * item, int column ){
 	QString tex=item->text(1);
     int it=tex.toInt();
-	doc->ClearSelection();
+	doc->ClearSelection(mTree,mTreepp,mTreetl);
 	if(doc->SelectID(it)){
 		emit itemClicked();
  		isSelect=true;
@@ -423,7 +431,7 @@ void NKView::selectFromTree( QTreeWidgetItem  * item, int column ){
 void NKView::selectFromppTree( QTreeWidgetItem  * item, int column ){
 	QString tex=item->text(1);
     int it=tex.toInt();
-	doc->ClearSelection();
+	doc->ClearSelection(mTree,mTreepp,mTreetl);
 	if(doc->SelectID(it)){
 		emit itemClicked();
  		isSelect=true;
@@ -439,7 +447,7 @@ void NKView::selectFromppTree( QTreeWidgetItem  * item, int column ){
 void NKView::selectFromtlTree( QTreeWidgetItem  * item, int column ){
 	QString tex=item->text(2);
     int it=tex.toInt();
-	doc->ClearSelection();
+	doc->ClearSelection(mTree,mTreepp,mTreetl);
 	if(doc->SelectID(it)){
 		emit itemClicked();
  		isSelect=true;
@@ -649,7 +657,7 @@ void NKView::mouseDoubleClickEvent ( QMouseEvent * event ){
       	}
        }
        else{
-       	doc->ClearSelection();
+       	doc->ClearSelection(mTree,mTreepp,mTreetl);
        	emit itemClicked();
        	if(doc->Select(m_skala,event->pos().x(),event->pos().y()-dy)){
        		if(islink){

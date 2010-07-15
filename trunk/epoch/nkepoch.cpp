@@ -113,11 +113,12 @@ bool  NKEpoch::SelectID(int id){
 	}
 	return false;
 }
-void  NKEpoch::ClearSelection(){
+void  NKEpoch::ClearSelection(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
 	isSelect=false;
 	if(select)
 		select->SetIsSel(false);
 	select=0;
+
 }
 
 NKhron* NKEpoch::GetSelHro() {
@@ -237,9 +238,13 @@ void NKEpoch::UpdateTree(QTreeWidget* tree,QTreeWidget *pp,QTreeWidget *tl)
 	tl->setColumnCount(3);
 	tl->setColumnWidth(0,100);
 	tl->hideColumn(2);
+
 	if(GetBrojEpoha()>0){
-		for(int i = 0; i < vhron.size(); ++i){
-			NKhron *hh=vhron.at(i);
+		int i;
+		for(int n = 0; n < vhron.size(); ++n){
+			NKhron *hh=vhron.at(n);
+			i=n;
+
          	NKRelEvent* epr = NULL;
 			epr = dynamic_cast<NKRelEvent*> (hh);
 			if(!epr){
@@ -1118,4 +1123,42 @@ void NKEpoch::import(QDataStream &o) {
 		vhron.at(i)->rebuidTree();
 	}
 
+}
+void NKEpoch::Realocate(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl){
+	if(select){
+		select->SetIsSel(false);
+	}
+	this->select=0;
+	this->isSelect=false;
+	this->Odvezi();
+	QVector<NKhron*> temp;
+	for (int i = 0; i < vhron.size(); ++i) {
+		temp.push_back(vhron.at(i));
+
+	}
+
+	vhron.clear();
+	vhron.empty();
+	for (int i = 0; i < temp.size(); ++i) {
+		this->AddEpohu(temp.at(i));
+	}
+	for (int i = 0; i < vhron.size(); ++i) {
+		int index=vhron.at(i)->getPindex();
+		for (int jj = 0; jj < vhron.size(); ++jj) {
+			if(vhron.at(jj)->getIndex()==index){
+				vhron.at(i)->setPindex(jj);
+				break;
+			}
+		}
+
+	}
+	this->Zavezi();
+	Del(tree,pp,tl);
+	tree->clear();
+	pp->clear();
+	tl->clear();
+	for (int i = 0; i < vhron.size(); ++i) {
+			vhron.at(i)->rebuidTree();
+    }
+	UpdateTree(tree,pp,tl);
 }

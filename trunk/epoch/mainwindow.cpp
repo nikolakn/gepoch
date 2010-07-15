@@ -640,7 +640,9 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 		if (id == QLatin1String("Render")) {
 				sel->setRenderType(value.toString().toInt());
 	   }
-	 Doc.UpdateTree(Tree,peopleList,timelineList);
+
+
+	Doc.UpdateTree(Tree,peopleList,timelineList);
 	 view->update();
 }
 void MainWindow::addProperty(QtVariantProperty *property, const QString &id)
