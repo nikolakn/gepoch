@@ -21,7 +21,8 @@
 #define NKAPSEPOCH_H
 //
 #include <nkhron.h>
-//
+//apsolutna epoha ima svoj pocetak i kraj nema apsolutnu epohu
+//////////////////////////////////////////////////////////////
 class NKApsEpoch : public NKhron
 {
 public:

@@ -29,6 +29,8 @@
 #include "nkrelevent.h"
 #include "nkapsperson.h"
 #include "nkrelperson.h"
+//NKView upravlja iscrtavanjem dokumenta i interakciom korisnika i dokumenta
+
 class NKView  : public QWidget
 {
     Q_OBJECT

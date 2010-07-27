@@ -19,12 +19,20 @@
  */
 
 #include <QtGui/QApplication>
-
+#include <QTranslator>
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    QTranslator myappTranslator;
+      	if (myappTranslator.load(":/translations/Epoch_en.qm")) {
+      		app.installTranslator(&myappTranslator);
+      	}
+	app.setApplicationName("gEpoch");
+	app.setApplicationVersion("1.5");
+	app.setOrganizationName("Nikola Knezevic");
+	app.setOrganizationDomain("http://code.google.com/p/gepoch/");
     Q_INIT_RESOURCE(epoch);
     MainWindow mainWin;
 
