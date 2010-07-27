@@ -29,7 +29,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-
+//event type list
 	list.append(tr("All"));
 	list.append(tr("War and Conflict"));
 	list.append(tr("Religion"));
@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 	list.append(tr("Exploration"));
 	list.append(tr("Nature"));
 	list.append(tr("Sports"));
+//render type list
     listRender.append(tr("Basic"));
     listRender.append(tr("Rect"));
     listRender.append(tr("Size1"));
@@ -52,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     listAp.append(tr("here+"));
     listAp.append(tr("only here"));
     listAp.append(tr("here-"));
+
 	decEdit=false;
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setMargin(0);
@@ -83,7 +85,7 @@ void MainWindow::newEpoch()
 	if(Doc.GetBrojEpoha()>0){
 		if(QMessageBox::warning(this,tr("Epoch"), tr("Do you want to save document"), tr("Save"),tr("No")))
 		{
-			//nemoj da sacuvas
+			//do not save. empty document
 			NKJD poc;
 			poc.SetShortDate(1,1,2010);
 			skala->SetPocetak(poc);
@@ -98,18 +100,19 @@ void MainWindow::newEpoch()
 			godina->document()->setPlainText(tr(""));
 		}
 		else{
-			//sacuvaj
+			//save document
 			save();
 		}
 	}
 	else{
+		//no thing to save
 		NKJD poc;
 			poc.SetShortDate(1,1,2010);
 			skala->SetPocetak(poc);
 	}
 
 }
-
+//todo
 void MainWindow::print()
 {
 #ifndef QT_NO_PRINTDIALOG
@@ -142,17 +145,18 @@ void MainWindow::save()
         return;
     }
      QDataStream out(&file);
-     out << (qint32)1; //verzija formata
+     //save format version and skala data
+     out << (qint32)1; //format version
 	 out<< (double)(skala->GetPocetak().GetJD());
 	 out<< (double)skala->GetRazmera();
      out<< (bool)decEdit;
 	 out<< (int)kategorija->currentIndex();
 	 view->save(out);
 	 Doc.save(out);
-    statusBar()->showMessage(tr("Saved '%1'").arg(fileName), 2000);
+     statusBar()->showMessage(tr("Saved '%1'").arg(fileName), 2000);
 }
 
-
+//todo
 void MainWindow::undo()
 {
 
@@ -162,9 +166,11 @@ void MainWindow::about()
 {
    QMessageBox::about(this, tr("About Epoch"),
             tr("The <b>Epoch</b>, simple timeline program.<br>"
+               "<br> "
                "Nikola Knezevic, <br>"
-               "Serbia 2010 <br>"
-               "nkcodeplus@gmail.com"));
+               "nkcodeplus@gmail.com<br>"
+               "<br> "
+               "Serbia 2010 <br>"));
 }
 
 void MainWindow::createActions()
@@ -409,12 +415,13 @@ void MainWindow::createDockWindows()
              this, SLOT(itemDoubleClicked()));
     itemClicked();
 }
-
+//move skala
 void MainWindow::mleft(){
     skala->PomeriDesno(20);
     skala->update();
     view->update();
 }
+//move skala
 void MainWindow::mright(){
     skala->PomeriLevo(20);
     skala->update();
@@ -437,21 +444,18 @@ void MainWindow::zoomout(){
 }
 
 void MainWindow::cut(){
-
     skala->update();
     view->update();
 }
 void MainWindow::del(){
-
     skala->update();
     view->update();
 }
 void MainWindow::link(){
-
     skala->update();
     view->update();
 }
-
+//property bar on value changed
 void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 {
 	 if (!propertyToId.contains(property))
@@ -463,6 +467,7 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	 QString id = propertyToId[property];
 	 NKApsEpoch* ep2 = NULL;
 	 ep2 = dynamic_cast<NKApsEpoch*> (sel);
+	 //for apsolute epoch
 	 if(ep2){
 		    if(id == QLatin1String("StartDate")) {
 			    	NKJD st;
@@ -503,6 +508,7 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 
         NKApsPerson* ap2 = NULL;
         ap2 = dynamic_cast<NKApsPerson*> (sel);
+        //for aps person
  		if(ap2){
             if (id == QLatin1String("Male")) {
           		 ap2->setIsMale(value.toBool());
@@ -512,6 +518,7 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	 }
     NKApsEvent* ae2 = NULL;
 	ae2 = dynamic_cast<NKApsEvent*> (sel);
+	//for aps event
 	if(ae2){
 	    if(id == QLatin1String("StartDate")) {
 			    	NKJD st;
@@ -527,6 +534,7 @@ void MainWindow::valueChanged(QtProperty *property, const QVariant &value)
 	}
      NKRelEvent* re2 = NULL;
      re2 = dynamic_cast<NKRelEvent*> (sel);
+     //for rel event
 		if(re2){
 		    if(id == QLatin1String("StartDate")) {
 		    	NKJD st;
@@ -663,6 +671,7 @@ void MainWindow::updateExpandState()
         idToExpanded[propertyToId[prop]] = propertyEditor->isExpanded(item);
     }
 }
+//property bar item clicked
 void MainWindow::itemClicked(){
     updateExpandState();
 
@@ -907,8 +916,8 @@ void MainWindow::decChanged(){
 			 decW->setReadOnly(false);
 		 }
 	 }
-
 }
+
 void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -936,7 +945,7 @@ void MainWindow::open()
     //////////
      QDataStream in(&file);
      qint32 verzija;
-     in >> verzija; //verzija formata
+     in >> verzija; //format version
      double pocetak;
      double rezmera;
 	 in >> pocetak;
@@ -948,11 +957,11 @@ void MainWindow::open()
      int ins;
 	 in >> ins;
 	 kategorija->setCurrentIndex(ins);
-	  view->open(in);
-	  Doc.open(in);
-	  Doc.UpdateTree(Tree,peopleList,timelineList);
-	  view->update();
-    statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
+	 view->open(in);
+	 Doc.open(in);
+	 Doc.UpdateTree(Tree,peopleList,timelineList);
+	 view->update();
+     statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
 }
 void MainWindow::import()
 {
@@ -976,7 +985,7 @@ void MainWindow::import()
 		decEdit=false;
 	     QDataStream in(&file);
 	     qint32 verzija;
-	     in >> verzija; //verzija formata
+	     in >> verzija; //format version
 	     double pocetak;
 	     double rezmera;
 		 in >> pocetak;
