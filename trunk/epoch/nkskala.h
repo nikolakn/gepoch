@@ -17,6 +17,14 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+// glavna uloga skale jeste pretvaranja koordinata na ekranu u odgovarajuci
+// datum i obrnuto. Glavna karakteristika skale je njen pocetak to je datum
+// koju se nalazi na nultoj koordinati ekrana i razmera na osnovu koje se
+// racunaju ostali datumi.
+
+//u planu je da se skala generalizuje i omoguci dodavalje drugih kalendara
+//kao i mogucnost prikazivanja dve ili vise skala koje bi prikazivale datume
+//razlcitih kalendara za datu koordinatu ekrana.
 #ifndef NKSKALA_H
 #define NKSKALA_H
 
@@ -46,6 +54,7 @@ private:
 public:
     //set
     void SetPolozajPokazivaca(int pol);
+    //datum na pocetku skale odnosno na nultoj koordinati ekrana
     void SetPocetak(NKJD poc) {m_pocetak=poc;};
     void SetRazmera(double raz) {m_razmera=raz;};
     void SetKorak(int kor) {m_korak=kor;};

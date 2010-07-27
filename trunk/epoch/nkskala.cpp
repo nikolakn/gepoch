@@ -26,6 +26,8 @@ NKSkala::NKSkala(QWidget *parent)
     : QWidget(parent)
 {
     m_pocetak.SetJD(0);
+    //cifra za razmeru je utvrdjena probom da najbolje izgleda pri
+    //prikazivanju
     m_razmera=2628;
     m_korak=200;
     m_stampajvreme=true;
@@ -38,6 +40,7 @@ NKSkala::NKSkala(QWidget *parent)
     setMouseTracking(true);
 
 }
+//crta jedan datum
 void NKSkala::NacrtajDatum(QPainter *p1,QPoint gde,QString datum,QString vreme){
     QLine line1(gde.x(), gde.y(),gde.x(),(gde.y()+L_DUZ));
     p1->drawLine(line1);
@@ -153,6 +156,7 @@ void  NKSkala::RastojanjeMinus(void){
         m_korak-=100;
     }
 }
+//postavi da datum pada na polovinu ekrana
 void  NKSkala::CentrirajDatum(JD datum){
     int w=width()/2;
     this->SetPocetak(datum);

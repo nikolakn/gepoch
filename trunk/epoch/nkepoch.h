@@ -30,6 +30,11 @@
 #include "nkapsperson.h"
 #include "nkrelperson.h"
 
+//Document class
+//svi objekti su nasledjeni iz NKhron i dodaju se u vektor vhron
+//pro dodavanju vodi se racuna da budu sortiran po datumu pocetka
+//ili ce nastati problemi pri popunjavanju timeline stabla
+
 class NKEpoch  
 {
 

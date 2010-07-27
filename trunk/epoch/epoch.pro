@@ -26,6 +26,8 @@ SOURCES +=nkview.cpp \
     nkapsperson.cpp \
     nkrelperson.cpp \
     nkepoch.cpp
+TRANSLATIONS = Epoch_sr.ts \
+			   Epoch_en.ts
 RESOURCES = epoch.qrc 
 target.path = Epoch
 ICON = /images/epoha.png
