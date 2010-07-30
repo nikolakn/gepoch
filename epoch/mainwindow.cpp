@@ -385,7 +385,7 @@ void MainWindow::createDockWindows() {
 			SIGNAL(valueChanged(QtProperty *, const QVariant &)), this,
 			SLOT(valueChanged(QtProperty *, const QVariant &)));
 
-	dock = new QDockWidget(this);
+        dock = new QDockWidget(tr("Property Editor"),this);
 	addDockWidget(Qt::LeftDockWidgetArea, dock);
 	QtVariantEditorFactory *variantFactory = new QtVariantEditorFactory(this);
 	propertyEditor = new QtTreePropertyBrowser(dock);
