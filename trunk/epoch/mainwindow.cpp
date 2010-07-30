@@ -26,6 +26,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QDockWidget>
 
+#define FILEVER 1
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent) {
 	//event type list
@@ -138,7 +139,7 @@ void MainWindow::save() {
 	}
 	QDataStream out(&file);
 	//save format version and skala data
-	out << (qint32) 1; //format version
+        out << (qint32) FILEVER; //format version
 	out << (double) (skala->GetPocetak().GetJD());
 	out << (double) skala->GetRazmera();
 	out << (bool) decEdit;
@@ -946,8 +947,8 @@ void MainWindow::open() {
 		return;
 	QFile file(fileName);
 	if (!file.open(QIODevice::ReadOnly)) {
-		QMessageBox::warning(this, tr("Dock Widgets"), tr(
-				"Cannot write file %1:\n%2.") .arg(fileName) .arg(
+                QMessageBox::warning(this, tr("Epoch"), tr(
+                                "Cannot Open file %1:\n%2.") .arg(fileName) .arg(
 				file.errorString()));
 		return;
 	}
@@ -964,22 +965,29 @@ void MainWindow::open() {
 	QDataStream in(&file);
 	qint32 verzija;
 	in >> verzija; //format version
-	double pocetak;
-	double rezmera;
-	in >> pocetak;
-	in >> rezmera;
-	NKJD pp(pocetak);
-	skala->SetPocetak(pp);
-	skala->SetRazmera(rezmera);
-	in >> decEdit;
-	int ins;
-	in >> ins;
-	kategorija->setCurrentIndex(ins);
-	view->open(in);
-	Doc.open(in);
-	Doc.UpdateTree(Tree, peopleList, timelineList);
-	view->update();
-	statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
+        if(verzija==FILEVER){
+            double pocetak;
+            double rezmera;
+            in >> pocetak;
+            in >> rezmera;
+            NKJD pp(pocetak);
+            skala->SetPocetak(pp);
+            skala->SetRazmera(rezmera);
+            in >> decEdit;
+            int ins;
+            in >> ins;
+            kategorija->setCurrentIndex(ins);
+            view->open(in);
+            Doc.open(in);
+            Doc.UpdateTree(Tree, peopleList, timelineList);
+            view->update();
+            statusBar()->showMessage(tr("Open '%1'").arg(fileName), 2000);
+        }
+        else{
+            QMessageBox::warning(this, tr("Epoch"), tr(
+                            "Cannot Open file version %1") .arg(verzija));
+        }
+
 }
 void MainWindow::import() {
 	QString fileName = QFileDialog::getOpenFileName(this, tr(
@@ -1001,20 +1009,26 @@ void MainWindow::import() {
 	QDataStream in(&file);
 	qint32 verzija;
 	in >> verzija; //format version
-	double pocetak;
-	double rezmera;
-	in >> pocetak;
-	in >> rezmera;
-	NKJD pp(pocetak);
-	skala->SetPocetak(pp);
-	skala->SetRazmera(rezmera);
-	in >> decEdit;
-	int ins;
-	in >> ins;
-	kategorija->setCurrentIndex(ins);
-	view->import(in);
-	Doc.import(in);
-	Doc.UpdateTree(Tree, peopleList, timelineList);
-	view->update();
-	statusBar()->showMessage(tr("import '%1'").arg(fileName), 2000);
+        if(verzija==FILEVER){
+            double pocetak;
+            double rezmera;
+            in >> pocetak;
+            in >> rezmera;
+            NKJD pp(pocetak);
+            skala->SetPocetak(pp);
+            skala->SetRazmera(rezmera);
+            in >> decEdit;
+            int ins;
+            in >> ins;
+            kategorija->setCurrentIndex(ins);
+            view->import(in);
+            Doc.import(in);
+            Doc.UpdateTree(Tree, peopleList, timelineList);
+            view->update();
+            statusBar()->showMessage(tr("import '%1'").arg(fileName), 2000);
+        }
+        else{
+            QMessageBox::warning(this, tr("Epoch"), tr(
+                            "Cannot Open file version %1") .arg(verzija));
+        }
 }
