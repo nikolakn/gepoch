@@ -13,7 +13,8 @@ HEADERS += nkjd.h \
     nkrelevent.h \
     nkapsperson.h \
     nkrelperson.h \
-    nkepoch.h
+    nkepoch.h \
+    nkgt.h
 SOURCES +=nkview.cpp \
     nkskala.cpp \
     mainwindow.cpp \
@@ -25,7 +26,8 @@ SOURCES +=nkview.cpp \
     nkrelevent.cpp \
     nkapsperson.cpp \
     nkrelperson.cpp \
-    nkepoch.cpp
+    nkepoch.cpp \
+    nkgt.cpp
 TRANSLATIONS = Epoch_sr.ts \
 			   Epoch_en.ts
 RESOURCES = epoch.qrc 
