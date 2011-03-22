@@ -18,6 +18,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+ //dodat je engleski i srpski jezik
 #include <QtGui/QApplication>
 #include <QTranslator>
 #include "mainwindow.h"
