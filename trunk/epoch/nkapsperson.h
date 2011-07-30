@@ -29,7 +29,7 @@ public:
 	NKApsPerson();
 	virtual ~NKApsPerson();
 	virtual void rebuidTree();
-	bool getIsMale() {return male;};
+        bool getIsMale() {return male;}
 	void setIsMale(bool m) {
 		male=m;
 		if(male)

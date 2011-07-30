@@ -32,7 +32,7 @@
 
 //Document class
 //svi objekti su nasledjeni iz NKhron i dodaju se u vektor vhron
-//pro dodavanju vodi se racuna da budu sortiran po datumu pocetka
+//pri dodavanju vodi se racuna da budu sortiran po datumu pocetka
 //ili ce nastati problemi pri popunjavanju timeline stabla
 
 class NKEpoch  
@@ -57,7 +57,7 @@ public:
 	void open(QDataStream &o);
 	void import(QDataStream &o);
 private:
-	NKhron* Getvhron(int aa) {return(vhron[aa]);};
+        NKhron* Getvhron(int aa) {return(vhron[aa]);}
 	int GetIndex(NKhron* hh);
 	void Odvezi();
 	void Zavezi();
