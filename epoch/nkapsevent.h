@@ -28,7 +28,7 @@ class NKApsEvent : public NKhron
 public:
 	NKApsEvent();
 	virtual ~NKApsEvent();
-	JD GetApStart() {return startDate;};
+        JD GetApStart() {return startDate;}
 	virtual void Draw(QPainter* ,NKSkala* ,int ,int );
 	virtual bool Select(NKSkala *skala,int x,int y);
 	virtual void rebuidTree();

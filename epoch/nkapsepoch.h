@@ -28,7 +28,7 @@ class NKApsEpoch : public NKhron
 public:
 	NKApsEpoch();
         virtual ~NKApsEpoch();
-	JD GetApStart() {return startDate;};
+        JD GetApStart() {return startDate;}
 	virtual void Draw(QPainter* painter,NKSkala* skala,int ,int YY);
 	virtual bool Select(NKSkala *skala,int x,int y);
 	virtual void rebuidTree();

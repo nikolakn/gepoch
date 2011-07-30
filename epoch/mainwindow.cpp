@@ -180,8 +180,7 @@ void MainWindow::createActions() {
 	openAct->setStatusTip(tr("Open document"));
 	connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
-	importAct
-			= new QAction(QIcon(":/images/Folder.png"), tr("Import..."), this);
+        importAct = new QAction(QIcon(":/images/Folder.png"), tr("Import..."), this);
 	importAct->setStatusTip(tr("Import document"));
 	connect(importAct, SIGNAL(triggered()), this, SLOT(import()));
 
@@ -209,8 +208,7 @@ void MainWindow::createActions() {
 	aEpoha->setStatusTip(tr("Add Aps Epoch"));
 	connect(aEpoha, SIGNAL(triggered()), view, SLOT(aepoha()));
 
-	rEpoha = new QAction(QIcon(":/images/repoha.png"), tr("&add rel epoch"),
-			this);
+	rEpoha = new QAction(QIcon(":/images/repoha.png"), tr("&add rel epoch"),this);
 	rEpoha->setStatusTip(tr("Add relative Epoch"));
 	connect(rEpoha, SIGNAL(triggered()), view, SLOT(repoha()));
 
@@ -226,24 +224,19 @@ void MainWindow::createActions() {
 	aPer->setStatusTip(tr("Add Aps person"));
 	connect(aPer, SIGNAL(triggered()), view, SLOT(aPer()));
 
-	rPer
-			= new QAction(QIcon(":/images/Users.png"), tr("&add rel person"),
-					this);
+	rPer= new QAction(QIcon(":/images/Users.png"), tr("&add rel person"),this);
 	rPer->setStatusTip(tr("Add rel person"));
 	connect(rPer, SIGNAL(triggered()), view, SLOT(rPer()));
 
-	imageAction = new QAction(QIcon(":/images/Photo.png"), tr("&add image"),
-			this);
+	imageAction = new QAction(QIcon(":/images/Photo.png"), tr("&add image"),this);
 	imageAction->setStatusTip(tr("Add Image"));
 	connect(imageAction, SIGNAL(triggered()), view, SLOT(aImage()));
 
-	cutAct = new QAction(QIcon(":/images/cut.png"), tr("&cut  relative link"),
-			this);
+	cutAct = new QAction(QIcon(":/images/cut.png"), tr("&cut  relative link"),this);
 	cutAct->setStatusTip(tr("cut relative link"));
 	connect(cutAct, SIGNAL(triggered()), view, SLOT(acut()));
 
-	linkAct = new QAction(QIcon(":/images/link.png"),
-			tr("&make relative link"), this);
+	linkAct = new QAction(QIcon(":/images/link.png"),tr("&make relative link"), this);
 	linkAct->setStatusTip(tr("make relative link"));
 	connect(linkAct, SIGNAL(triggered()), view, SLOT(alink()));
 
@@ -263,7 +256,6 @@ void MainWindow::createActions() {
 	aboutQtAct = new QAction(tr("About &Qt"), this);
 	aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
 	connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-
 }
 
 void MainWindow::createMenus() {
@@ -374,18 +366,16 @@ void MainWindow::createDockWindows() {
 
 	///////////////
 	view->setTree(Tree, peopleList, timelineList);
-	connect(Tree, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)), view,
-			SLOT(selectFromTree( QTreeWidgetItem *, int)));
+        connect(Tree, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
+                        view, SLOT(selectFromTree( QTreeWidgetItem *, int)));
 	connect(peopleList, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
 			view, SLOT(selectFromppTree( QTreeWidgetItem *, int)));
 	connect(timelineList, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
 			view, SLOT(selectFromtlTree( QTreeWidgetItem *, int)));
 	variantManager = new QtVariantPropertyManager(this);
 
-	connect(variantManager,
-			SIGNAL(valueChanged(QtProperty *, const QVariant &)), this,
+	connect(variantManager,SIGNAL(valueChanged(QtProperty *, const QVariant &)), this,
 			SLOT(valueChanged(QtProperty *, const QVariant &)));
-
         dock = new QDockWidget(tr("Property Editor"),this);
 	addDockWidget(Qt::LeftDockWidgetArea, dock);
 	QtVariantEditorFactory *variantFactory = new QtVariantEditorFactory(this);
