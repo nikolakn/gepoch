@@ -44,7 +44,7 @@ public:
 	int GetBrojEpoha(void);
 	void Draw(QPainter *painter,NKSkala *skala,int Y,short kateg,int zoom);
 	bool Select(NKSkala *skala,int x,int y);
-	void ClearSelection(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
+        void ClearSelection();
 	NKhron* GetSelHro();
 	void UpdateTree(QTreeWidget *tree,QTreeWidget *pp,QTreeWidget *tl);
 	bool SelectID(int id);

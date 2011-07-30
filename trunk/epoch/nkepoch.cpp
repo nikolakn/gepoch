@@ -112,13 +112,11 @@ bool NKEpoch::SelectID(int id) {
     }
     return false;
 }
-void NKEpoch::ClearSelection(QTreeWidget *tree, QTreeWidget *pp,
-                             QTreeWidget *tl) {
+void NKEpoch::ClearSelection() {
     isSelect = false;
     if (select)
         select->SetIsSel(false);
     select = 0;
-
 }
 
 NKhron* NKEpoch::GetSelHro() {

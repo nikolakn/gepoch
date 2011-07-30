@@ -346,7 +346,7 @@ void NKView::mousePressEvent(QMouseEvent *event) {
 			}
 		} else {
 
-			doc->ClearSelection(mTree, mTreepp, mTreetl);
+                        doc->ClearSelection();
 			doc->Realocate(mTree, mTreepp, mTreetl);
 
 			emit
@@ -417,10 +417,10 @@ void NKView::mouseReleaseEvent(QMouseEvent * event) {
 	}
 
 }
-void NKView::selectFromTree(QTreeWidgetItem * item, int column) {
+void NKView::selectFromTree(QTreeWidgetItem * item) {
 	QString tex = item->text(1);
 	int it = tex.toInt();
-	doc->ClearSelection(mTree, mTreepp, mTreetl);
+        doc->ClearSelection();
 	if (doc->SelectID(it)) {
 		emit itemClicked();
 		isSelect = true;
@@ -433,10 +433,10 @@ void NKView::selectFromTree(QTreeWidgetItem * item, int column) {
 		update();
 	}
 }
-void NKView::selectFromppTree(QTreeWidgetItem * item, int column) {
+void NKView::selectFromppTree(QTreeWidgetItem * item) {
 	QString tex = item->text(1);
 	int it = tex.toInt();
-	doc->ClearSelection(mTree, mTreepp, mTreetl);
+        doc->ClearSelection();
 	if (doc->SelectID(it)) {
 		emit itemClicked();
 		isSelect = true;
@@ -449,10 +449,10 @@ void NKView::selectFromppTree(QTreeWidgetItem * item, int column) {
 		update();
 	}
 }
-void NKView::selectFromtlTree(QTreeWidgetItem * item, int column) {
+void NKView::selectFromtlTree(QTreeWidgetItem * item) {
 	QString tex = item->text(2);
 	int it = tex.toInt();
-	doc->ClearSelection(mTree, mTreepp, mTreetl);
+        doc->ClearSelection();
 	if (doc->SelectID(it)) {
 		emit itemClicked();
 		isSelect = true;
@@ -464,6 +464,7 @@ void NKView::selectFromtlTree(QTreeWidgetItem * item, int column) {
 		}
 		update();
 	}
+
 }
 void NKView::adel() {
 	NKhron* sel = doc->GetSelHro();
@@ -669,7 +670,7 @@ void NKView::mouseDoubleClickEvent(QMouseEvent * event) {
 				}
 			}
 		} else {
-			doc->ClearSelection(mTree, mTreepp, mTreetl);
+                        doc->ClearSelection();
 			emit
 			itemClicked();
 			if (doc->Select(m_skala, event->pos().x(), event->pos().y() - dy)) {
