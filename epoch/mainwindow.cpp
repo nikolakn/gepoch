@@ -367,11 +367,11 @@ void MainWindow::createDockWindows() {
 	///////////////
 	view->setTree(Tree, peopleList, timelineList);
         connect(Tree, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
-                        view, SLOT(selectFromTree( QTreeWidgetItem *, int)));
-	connect(peopleList, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
-			view, SLOT(selectFromppTree( QTreeWidgetItem *, int)));
+                        view, SLOT(selectFromTree( QTreeWidgetItem *)));
+        connect(peopleList, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
+                        view, SLOT(selectFromppTree( QTreeWidgetItem *)));
 	connect(timelineList, SIGNAL(itemDoubleClicked( QTreeWidgetItem *, int)),
-			view, SLOT(selectFromtlTree( QTreeWidgetItem *, int)));
+                        view, SLOT(selectFromtlTree( QTreeWidgetItem * )));
 	variantManager = new QtVariantPropertyManager(this);
 
 	connect(variantManager,SIGNAL(valueChanged(QtProperty *, const QVariant &)), this,

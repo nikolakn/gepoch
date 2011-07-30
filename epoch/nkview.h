@@ -57,9 +57,9 @@ signals:
     void itemClicked();
     void itemDoubleClicked();
 private slots:
-    void selectFromTree( QTreeWidgetItem  * item, int column );
-    void selectFromppTree( QTreeWidgetItem  * item, int column );
-    void selectFromtlTree( QTreeWidgetItem  * item, int column );
+    void selectFromTree( QTreeWidgetItem  * item );
+    void selectFromppTree( QTreeWidgetItem  * item );
+    void selectFromtlTree( QTreeWidgetItem  * item);
 	void aepoha();
 	void adog();
 	void aPer();
