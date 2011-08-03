@@ -21,7 +21,9 @@
         <file>images/undo.png</file>
         <file>images/zoomin.png</file>
         <file>images/zoomout.png</file>
-		<file>images/Man.png</file>
-		<file>images/Users.png</file>
+        <file>images/Man.png</file>
+        <file>images/Users.png</file>
+        <file>images/ar.png</file>
+        <file>images/Rar.png</file>
     </qresource>
 </RCC>
