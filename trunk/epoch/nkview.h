@@ -60,16 +60,18 @@ private slots:
     void selectFromTree( QTreeWidgetItem  * item );
     void selectFromppTree( QTreeWidgetItem  * item );
     void selectFromtlTree( QTreeWidgetItem  * item);
-	void aepoha();
-	void adog();
-	void aPer();
-	void rPer();
-	void repoha();
+    void aepoha();
+    void adog();
+    void aPer();
+    void rPer();
+    void repoha();
     void rdog();
     void aImage();
-	void adel();
-	void acut();
-	void alink();
+    void adel();
+    void acut();
+    void alink();
+    void clearAr();
+    void Anim();
 private:
     NKSkala *m_skala;
     NKEpoch *doc;
@@ -89,6 +91,14 @@ private:
     bool pomeri;
     short kateg;
     int zoom;
+    bool LAr;
+    bool RAr;
+    bool Arr;
+    int xAr;
+    QTimer *timer1;
+    QTimer *anim;
+    QImage IAr;
+    QImage IRAr;
 };
 
 #endif // NKVIEW_H

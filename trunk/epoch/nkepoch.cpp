@@ -55,8 +55,7 @@ int NKEpoch::GetBrojEpoha(void) {
 void NKEpoch::Draw(QPainter *painter, NKSkala *skala, int Y, short kateg,
                    int zoom) {
     if (GetBrojEpoha() > 0) {
-        for (QVector<NKhron*>::const_iterator qq = vhron.begin(); qq
-                                                   != vhron.end(); ++qq) {
+        for (QVector<NKhron*>::const_iterator qq = vhron.begin(); qq!= vhron.end(); ++qq) {
 
             //filtering event type all=0, war, art....
             if ((*qq)->getEventType() == kateg || kateg == 0) {
@@ -341,7 +340,7 @@ void NKEpoch::Del(QTreeWidget *tree, QTreeWidget *pp, QTreeWidget *tl) {
     isSelect = false;
 }
 void NKEpoch::Link(NKhron* pre, QTreeWidget *tree, QTreeWidget *pp,QTreeWidget *tl) {
-    //dodaj relativni posavi osobine apsolutnog, premesti druge linkove na njega
+    //dodaj relativni, postavi osobine apsolutnog, premesti druge linkove na njega
     //obrisi stari apsolutni
     if (pre) {
         if (select != pre) {
