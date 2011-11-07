@@ -343,140 +343,143 @@ void NKEpoch::Link(NKhron* pre, QTreeWidget *tree, QTreeWidget *pp,QTreeWidget *
     //dodaj relativni, postavi osobine apsolutnog, premesti druge linkove na njega
     //obrisi stari apsolutni
     try{
-        if (pre) {
-            if (select != pre) {
-                JD stp = pre->GetApStart();
-                NKRelEpoch* re1 = NULL;
-                re1 = dynamic_cast<NKRelEpoch*> (select);
-                NKApsEpoch* ae1 = NULL;
-                ae1 = dynamic_cast<NKApsEpoch*> (select);
-                if (ae1 || !re1) {
-                    JD st = select->GetApStart();
-                    NKApsPerson* rp = NULL;
-                    rp = dynamic_cast<NKApsPerson*> (pre);
-                    if (rp) {
+           if (pre) {
+               if (select != pre) {
+                   JD stp = pre->GetApStart();
+                   NKRelEpoch* re1 = NULL;
+                   re1 = dynamic_cast<NKRelEpoch*> (select);
+                   NKApsEpoch* ae1 = NULL;
+                   ae1 = dynamic_cast<NKApsEpoch*> (select);
+                   if (ae1 || re1) {
+                       JD st = select->GetApStart();
+                       NKApsPerson* rp = NULL;
+                       rp = dynamic_cast<NKApsPerson*> (pre);
+                       if (rp) {
 
-                        NKRelPerson* aph = new NKRelPerson(select);
-                        NKJD start(stp);
-                        start.SubDay(st);
-                        aph->SetStartDate(start.GetJD());
-                        aph->SetEndDate(pre->GetEndDate());
-                        aph->SetPozY(pre->GetPozY());
-                        aph->setLineColor(pre->getLineColor());
-                        aph->setName(pre->getName());
-                        aph->setDesc(pre->getDesc());
-                        aph->setZoom(pre->getZoom());
-                        aph->setRenderType(pre->getRenderType());
-                        aph->setEventType(pre->getEventType());
-                        aph->setRelLinkDraw(pre->getRelLinkDraw());
-                        aph->setIndex(pre->getIndex());
-                        aph->setPindex(pre->getPindex());
-                        aph->setIsMale(rp->getIsMale());
-                        aph->setDozoom(pre->getDozoom());
-                        aph->setImage(pre->getImage());
-                        AddEpohu(aph);
-                        for (int i = 0; i < vhron.size(); ++i) {
-                            if (vhron.at(i)->GetApsolute() == pre) {
-                                vhron.at(i)->setApsEpoch(aph);
-                            }
-                        }
-                        select->SetIsSel(false);
-                        select = pre;
-                        Del(tree, pp, tl);
-                        tree->clear();
-                        pp->clear();
-                        tl->clear();
-                        for (int i = 0; i < vhron.size(); ++i) {
-                            vhron.at(i)->rebuidTree();
-                        }
-                    } else {
-                        NKApsEpoch* re = NULL;
-                        re = dynamic_cast<NKApsEpoch*> (pre);
-                        NKApsEvent* rev = NULL;
-                        rev = dynamic_cast<NKApsEvent*> (pre);
-                        if (re) {
+                           NKRelPerson* aph = new NKRelPerson(select);
+                           NKJD start(stp);
+                           start.SubDay(st);
+                           aph->SetStartDate(start.GetJD());
+                           aph->SetEndDate(pre->GetEndDate());
+                           aph->SetPozY(pre->GetPozY());
+                           aph->setLineColor(pre->getLineColor());
+                           aph->setName(pre->getName());
+                           aph->setDesc(pre->getDesc());
+                           aph->setZoom(pre->getZoom());
+                           aph->setRenderType(pre->getRenderType());
+                           aph->setEventType(pre->getEventType());
+                           aph->setRelLinkDraw(pre->getRelLinkDraw());
+                           aph->setIndex(pre->getIndex());
+                           aph->setPindex(pre->getPindex());
+                           aph->setIsMale(rp->getIsMale());
+                           aph->setDozoom(pre->getDozoom());
+                           aph->setImage(pre->getImage());
+                           AddEpohu(aph);
+                           for (int i = 0; i < vhron.size(); ++i) {
+                               if (vhron.at(i)->GetApsolute() == pre) {
+                                   vhron.at(i)->setApsEpoch(aph);
+                               }
+                           }
+                           select->SetIsSel(false);
+                           select = pre;
+                           Del(tree, pp, tl);
+                           tree->clear();
+                           pp->clear();
+                           tl->clear();
+                           for (int i = 0; i < vhron.size(); ++i) {
+                               vhron.at(i)->rebuidTree();
+                           }
+                       } else {
+                           NKApsEpoch* re = NULL;
+                           re = dynamic_cast<NKApsEpoch*> (pre);
+                           NKApsEvent* rev = NULL;
+                           rev = dynamic_cast<NKApsEvent*> (pre);
+                                                    if(re1){
+                                if(re1->getApsEpoch()==pre) return;
+                           }
+                           if (re) {
 
-                            NKRelEpoch* aph = new NKRelEpoch(select);
-                            NKJD start(stp);
-                            start.SubDay(st);
-                            aph->SetStartDate(start.GetJD());
-                            aph->SetEndDate(pre->GetEndDate());
-                            aph->SetPozY(pre->GetPozY());
-                            aph->setLineColor(pre->getLineColor());
-                            aph->setName(pre->getName());
-                            aph->setDesc(pre->getDesc());
-                            aph->setZoom(pre->getZoom());
-                            aph->setRenderType(pre->getRenderType());
-                            aph->setEventType(pre->getEventType());
-                            aph->setRelLinkDraw(pre->getRelLinkDraw());
-                            aph->setIndex(pre->getIndex());
-                            aph->setPindex(pre->getPindex());
-                            aph->setDozoom(pre->getDozoom());
-                            aph->setImage(pre->getImage());
-                            AddEpohu(aph);
-                            for (int i = 0; i < vhron.size(); ++i) {
-                                if (vhron.at(i)->GetApsolute() == pre) {
-                                    vhron.at(i)->setApsEpoch(aph);
-                                }
-                            }
-                            select->SetIsSel(false);
-                            select = pre;
-                            Del(tree, pp, tl);
-                            tree->clear();
-                            pp->clear();
-                            tl->clear();
-                            for (int i = 0; i < vhron.size(); ++i) {
-                                vhron.at(i)->rebuidTree();
-                            }
+                               NKRelEpoch* aph = new NKRelEpoch(select);
+                               NKJD start(stp);
+                               start.SubDay(st);
+                               aph->SetStartDate(start.GetJD());
+                               aph->SetEndDate(pre->GetEndDate());
+                               aph->SetPozY(pre->GetPozY());
+                               aph->setLineColor(pre->getLineColor());
+                               aph->setName(pre->getName());
+                               aph->setDesc(pre->getDesc());
+                               aph->setZoom(pre->getZoom());
+                               aph->setRenderType(pre->getRenderType());
+                               aph->setEventType(pre->getEventType());
+                               aph->setRelLinkDraw(pre->getRelLinkDraw());
+                               aph->setIndex(pre->getIndex());
+                               aph->setPindex(pre->getPindex());
+                               aph->setDozoom(pre->getDozoom());
+                               aph->setImage(pre->getImage());
+                               AddEpohu(aph);
+                               for (int i = 0; i < vhron.size(); ++i) {
+                                   if (vhron.at(i)->GetApsolute() == pre) {
+                                       vhron.at(i)->setApsEpoch(aph);
+                                   }
+                               }
+                               select->SetIsSel(false);
+                               select = pre;
+                               Del(tree, pp, tl);
+                               tree->clear();
+                               pp->clear();
+                               tl->clear();
+                               for (int i = 0; i < vhron.size(); ++i) {
+                                   vhron.at(i)->rebuidTree();
+                               }
 
-                        }
-                        if (rev) {
+                           }
+                           if (rev) {
 
-                            NKRelEvent* aph = new NKRelEvent(select);
-                            NKJD start(stp);
-                            start.SubDay(st);
-                            aph->SetStartDate(start.GetJD());
-                            aph->SetEndDate(0);
-                            aph->SetPozY(pre->GetPozY());
-                            aph->setLineColor(pre->getLineColor());
-                            aph->setName(pre->getName());
-                            aph->setDesc(pre->getDesc());
-                            aph->setZoom(pre->getZoom());
-                            aph->setRenderType(pre->getRenderType());
-                            aph->setEventType(pre->getEventType());
-                            aph->setRelLinkDraw(pre->getRelLinkDraw());
-                            aph->setIndex(pre->getIndex());
-                            aph->setPindex(pre->getPindex());
-                            aph->setDozoom(pre->getDozoom());
-                            aph->setImage(pre->getImage());
-                            Odvezi();
+                               NKRelEvent* aph = new NKRelEvent(select);
+                               NKJD start(stp);
+                               start.SubDay(st);
+                               aph->SetStartDate(start.GetJD());
+                               aph->SetEndDate(0);
+                               aph->SetPozY(pre->GetPozY());
+                               aph->setLineColor(pre->getLineColor());
+                               aph->setName(pre->getName());
+                               aph->setDesc(pre->getDesc());
+                               aph->setZoom(pre->getZoom());
+                               aph->setRenderType(pre->getRenderType());
+                               aph->setEventType(pre->getEventType());
+                               aph->setRelLinkDraw(pre->getRelLinkDraw());
+                               aph->setIndex(pre->getIndex());
+                               aph->setPindex(pre->getPindex());
+                               aph->setDozoom(pre->getDozoom());
+                               aph->setImage(pre->getImage());
+                               Odvezi();
 
-                            AddEpohu(aph);
-                            for (int i = 0; i < vhron.size(); ++i) {
-                                if (vhron.at(i)->GetApsolute() == pre) {
-                                    vhron.at(i)->setApsEpoch(aph);
-                                }
-                            }
-                            select->SetIsSel(false);
-                            select = pre;
-                            Del(tree, pp, tl);
-                            tree->clear();
-                            pp->clear();
-                            tl->clear();
-                            for (int i = 0; i < vhron.size(); ++i) {
-                                vhron.at(i)->rebuidTree();
-                            }
-                        }
+                               AddEpohu(aph);
+                               for (int i = 0; i < vhron.size(); ++i) {
+                                   if (vhron.at(i)->GetApsolute() == pre) {
+                                       vhron.at(i)->setApsEpoch(aph);
+                                   }
+                               }
+                               select->SetIsSel(false);
+                               select = pre;
+                               Del(tree, pp, tl);
+                               tree->clear();
+                               pp->clear();
+                               tl->clear();
+                               for (int i = 0; i < vhron.size(); ++i) {
+                                   vhron.at(i)->rebuidTree();
+                               }
+                           }
 
-                    }
-                    //////////////
-                }
-            }
-        }
-    }
-    catch (const std::exception& e) {
+                       }
+                       //////////////
+                   }
+               }
+           }
+       }
+       catch (const std::exception& e) {
 
-    }
+       }
 }
 void NKEpoch::ocisti() {
     m_YY = 0;
